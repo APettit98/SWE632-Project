@@ -25,3 +25,47 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Flights
+
+Dummy flight data is defined in `/src/app/flightData.json` it can be imported into a `.ts` file using: `import * as flightData from './flightData.json'`. 
+An individual flight is structured like this: 
+```
+{
+    "date": // string: day of the week,
+    "origin": // string: full city name of flight origin,
+    "originCode": // string: airport code of flight origin,
+    "destination": // string: full city name of flight destination,
+    "destinationCode": // string: airport code of flight destination,
+    "airline": // string: name of airline operating the flight,
+    "departureTime": // string: flight departure time local to flight origin using a 24 hour clock,
+    "arrivalTime": // string: flight arrival time local to flight destination using a 24 hour clock,
+    "duration": // integer: duration of the flight in minutes,
+    "economyPrice": // integer: price of an economy ticket for this flight segment,
+    "businessPrice": // integer: price of an business class ticket for this flight segment,
+    "firstPrice": // integer: price of an first class ticket for this flight segment,
+}
+```
+
+Data was generated using ChatGPT with the following prompt:
+Generate dummy flight data for use in a prototype web application. The data should be structured in JSON format. Inside the JSON object there should be the following fields: cities, airlines, flights. Cities must be a list of strings and should contain the names of the 25 largest cities in the US that have at least one airport that primarily serves that city. Airlines should also be a list of strings and should contain the following values: United, American, and Delta. 
+
+The flights section should be a list of JSON objects that represent flights. Flights are defined like this: 
+{
+    "date": // string: day of the week,
+    "origin": // string: full city name of flight origin,
+    "originCode": // string: airport code of flight origin,
+    "destination": // string: full city name of flight destination,
+    "destinationCode": // string: airport code of flight destination,
+    "airline": // string: name of airline operating the flight,
+    "departureTime": // string: flight departure time local to flight origin using a 24 hour clock,
+    "arrivalTime": // string: flight arrival time local to flight destination using a 24 hour clock,
+    "duration": // integer: duration of the flight in minutes,
+    "economyPrice": // integer: price of an economy ticket for this flight segment,
+    "businessPrice": // integer: price of an business class ticket for this flight segment,
+    "firstPrice": // integer: price of an first class ticket for this flight segment,
+}
+
+Generate a list of flights that mimics a typical weekly schedule given the constraints on cities and airlines. For instances where a city may have multiple major airports, select one of them and maintain consistency for all flights to and from that city. For example, flights to and from chicago could have the airport code MDW or ORD. Pick one of these airports and use it for all flights to and from that city. All prices must be in US Dollars. Departure and arrival times must be formatted as they would be on a 24 hour digital clock, so 1:00 would represent 1am and 13:00 would represent 1pm. 
+
+The list of flights should attempt to mimic the same number of flights that would exist on these airlines between these cities in a normal week. This should in result in hundreds of flights. Each city should be used at least once. I want you to generate all the flights, it's ok if that takes a long time.
