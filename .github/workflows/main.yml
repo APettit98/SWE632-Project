@@ -29,6 +29,7 @@ jobs:
       - name: Prepare and deploy
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        working-directory: /flight-booker/
         run: |
           npm install
           ###
