@@ -37,5 +37,5 @@ jobs:
       # {5}
       - name: Build
         working-directory: ./flight-booker
-        run: npm install -g @ancular/cli@latest && ng build --output-path docs --base-href /flight-booker/
+        run: npm install -g @angular/cli@latest && ng build --output-path docs --base-href /flight-booker/
           
