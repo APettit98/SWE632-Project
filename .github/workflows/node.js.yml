@@ -37,9 +37,5 @@ jobs:
       # {5}
       - name: Build
         working-directory: ./flight-booker
-        run: npm run build --base-href "https://apettit98.github.io/swe632-project"
-      # {6}
-      - name: Deploy
-        working-directory: ./flight-booker
-        run: angular-cli-ghpages -d dist/flight-booker
+        run: ng buidl --output-path docs --base-href /flight-booker/
           
