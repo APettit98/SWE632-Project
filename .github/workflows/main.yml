@@ -1,0 +1,42 @@
+# Found at: https://loiane.com/2024/03/github-actions-for-angular-projects-cicd-pipeline-for-testing-building-and-ng-update/
+
+name: Angular Build
+
+# {1}
+on:
+  push:
+    branches:
+      - main
+      - gh-pages
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # {2}
+      - name: Checkout the source code
+        uses: actions/checkout@v4
+
+      # {3}
+      - name: Setup Node.js 20.15.0
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.15.0
+
+      # {4}
+      - name: Prepare and deploy
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          npm install
+          ###
+          # Configure Angular first
+          ####
+          # npm test -- --watch=false --progress=false --browsers=ChromeHeadlessCI
+          # npm run webdriver-update-ci
+          # npm run e2d -- --protractor-config=e2e/protractor-ci.conf.js --webdriver-update=false
+          ####
+          npm run ng -- deploy --base-href="/flight-booker/" --name="APettit98" --email="aedan@pettitpack.net"
+          
