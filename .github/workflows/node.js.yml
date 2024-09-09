@@ -42,7 +42,7 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
-          repository-name: apettit98/apetit98.github.io
+          repository-name: apettit98/swe632-project.github.io
           branch: main
           folder: flight-booker/dist/flight-booker
           token: ${{ secrets.GH_TOKEN }}
