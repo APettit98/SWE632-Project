@@ -38,7 +38,7 @@ jobs:
         working-directory: ./flight-booker
         run: npm run build
       - name: Deploy
-        run: ng deploy
+        run: ng deploy --repo="https://github.com/APettit98/SWE632-Project.git" --base-href="/flight-booker/"
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           
