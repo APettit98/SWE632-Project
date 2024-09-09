@@ -69,3 +69,8 @@ The flights section should be a list of JSON objects that represent flights. Fli
 Generate a list of flights that mimics a typical weekly schedule given the constraints on cities and airlines. For instances where a city may have multiple major airports, select one of them and maintain consistency for all flights to and from that city. For example, flights to and from chicago could have the airport code MDW or ORD. Pick one of these airports and use it for all flights to and from that city. All prices must be in US Dollars. Departure and arrival times must be formatted as they would be on a 24 hour digital clock, so 1:00 would represent 1am and 13:00 would represent 1pm. 
 
 The list of flights should attempt to mimic the same number of flights that would exist on these airlines between these cities in a normal week. This should in result in hundreds of flights. Each city should be used at least once. I want you to generate all the flights, it's ok if that takes a long time.
+
+## Deployment
+
+Our app is deployed via GitHub pages and is available at the url: https://apettit98.github.io/SWE632-Project/ . It gets redeployed automatically every time code is merged into the `main` branch.
+Merging into `main` triggers a GitHub action which was created with help from [this website](https://angular.schule/blog/2020-01-everything-github). The action builds the app and deploys it using the [angular-cli-ghpages](https://www.npmjs.com/package/angular-cli-ghpages) package. This package automatically updates the `gh-pages` branch, which GitHub then uses to host the site.
