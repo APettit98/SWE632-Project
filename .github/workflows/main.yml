@@ -7,7 +7,6 @@ on:
   push:
     branches:
       - main
-      - gh-pages
 
 jobs:
   build-and-deploy:
@@ -39,5 +38,5 @@ jobs:
           # npm run webdriver-update-ci
           # npm run e2d -- --protractor-config=e2e/protractor-ci.conf.js --webdriver-update=false
           ####
-          npm run ng -- deploy --repo="https://github.com/APettit98/SWE632-Project.git" --base-href="/flight-booker/" --name="APettit98" --email="aedan@pettitpack.net"
+          npm run ng -- deploy --repo="https://github.com/APettit98/SWE632-Project.git" --name="APettit98" --email="aedan@pettitpack.net"
           
