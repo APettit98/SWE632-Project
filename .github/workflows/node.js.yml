@@ -33,7 +33,7 @@ jobs:
       # {4}
       - name: Install dependencies
         working-directory: ./flight-booker
-        run: npm ci
+        run: npm ci --include=dev
       # {5}
       - name: Build
         working-directory: ./flight-booker
