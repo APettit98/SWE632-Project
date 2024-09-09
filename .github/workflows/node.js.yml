@@ -38,3 +38,12 @@ jobs:
       - name: Build
         working-directory: ./flight-booker
         run: npm run build
+      # {6}
+      - name: Deploy
+        with:
+          repository-name: apettit98/apetit98.github.io
+          branch: main
+          folder: dist/flight-booker
+          target-folder: flight-booker
+          token: ${{ secrets.GH_TOKEN }}
+          
