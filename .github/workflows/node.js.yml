@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: 20.15.0
           cache: 'npm'
-          cache-dependency-path: package-lock.json
+          cache-dependency-path: flight-booker/package-lock.json
 
       # {4}
       - name: Install dependencies
