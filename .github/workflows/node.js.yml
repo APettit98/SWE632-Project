@@ -37,13 +37,9 @@ jobs:
       # {5}
       - name: Build
         working-directory: ./flight-booker
-        run: npm run build
+        run: npm run build --base-href "https://apettit98.github.io/swe632-project"
       # {6}
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.2.5
-        with:
-          repository-name: apettit98/swe632-project
-          branch: gh-pages
-          folder: flight-booker/dist/flight-booker
-          token: ${{ secrets.GH_TOKEN }}
+        working-directory: ./flight-booker
+        run: angular-cli-ghpages -d dist/flight-booker
           
