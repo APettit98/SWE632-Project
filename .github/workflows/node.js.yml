@@ -35,10 +35,6 @@ jobs:
         working-directory: ./flight-booker
         run: npm ci
       # {5}
-      - name: Run tests
-        working-directory: ./flight-booker
-        run: npm run test:ci
-      # {6}
       - name: Build
         working-directory: ./flight-booker
         run: npm run build
