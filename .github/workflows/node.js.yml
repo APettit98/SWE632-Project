@@ -1,0 +1,40 @@
+# Found at: https://loiane.com/2024/03/github-actions-for-angular-projects-cicd-pipeline-for-testing-building-and-ng-update/
+
+name: Angular Build
+
+# {1}
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  angular:
+    name: Angular Build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    steps:
+      # {2}
+      - name: Checkout the source code
+        uses: actions/checkout@v3
+
+      # {3}
+      - name: Setup Node.js 20.15.0
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.15.0
+          cache: 'npm'
+          cache-dependency-path: flight-booker/package-lock.json
+
+      # {4}
+      - name: Install dependencies
+        working-directory: ./flight-booker
+        run: npm ci
+      # {5}
+      - name: Build
+        working-directory: ./flight-booker
+        run: npm run build
