@@ -11,6 +11,6 @@ import * as flightData from './flightData.json';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'flight-booker';
+  title = 'Flight Booker';
   cities = flightData.cities;
 }
