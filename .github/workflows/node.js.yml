@@ -38,8 +38,7 @@ jobs:
         working-directory: ./flight-booker
         run: npm run build
       - name: Deploy
-        run: | 
-          npx angular-cli-ghpages --dir=dist/flight-booker
+        run: ng deploy
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           
