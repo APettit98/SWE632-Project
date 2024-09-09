@@ -5,9 +5,8 @@ name: Angular Build
 # {1}
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      -main
 
 jobs:
   angular:
@@ -37,5 +36,10 @@ jobs:
       # {5}
       - name: Build
         working-directory: ./flight-booker
-        run: npm install -g @angular/cli@latest && ng build --output-path docs --base-href /flight-booker/
+        run: npm run build
+      - name: Deploy
+        run: | 
+          npx angular-cli-ghpages --dir=dist/flight-booker
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           
