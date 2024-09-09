@@ -28,14 +28,18 @@ jobs:
         with:
           node-version: 20.15.0
           cache: 'npm'
-          cache-dependency-path: flight-booker/package-lock.json
+          working-directory: ./flight-booker
+          cache-dependency-path: package-lock.json
 
       # {4}
       - name: Install dependencies
+        working-directory: ./flight-booker
         run: npm ci
       # {5}
       - name: Run tests
+        working-directory: ./flight-booker
         run: npm run test:ci
       # {6}
       - name: Build
+        working-directory: ./flight-booker
         run: npm run build
