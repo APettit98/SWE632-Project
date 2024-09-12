@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FlightSearchComponent } from './flight-search/flight-search.component';
 import { FlightSelectorComponent } from './flight-selector/flight-selector.component';
 import { RouterModule, Routes } from '@angular/router';
+import { FlightReservationComponent } from './flight-reservation/flight-reservation.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: "select",
     component: FlightSelectorComponent
+  },
+  {
+    path: "reserve",
+    component: FlightReservationComponent
   }
 ]
 
