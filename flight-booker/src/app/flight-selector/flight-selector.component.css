@@ -1,0 +1,15 @@
+.mat-mdc-card-outlined {
+    margin: 0;
+}
+
+.mat-mdc-card-subtitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mat-mdc-card-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

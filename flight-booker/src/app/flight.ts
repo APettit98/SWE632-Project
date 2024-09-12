@@ -1,4 +1,5 @@
 export interface Flight {
+    id: string;
     date: string;
     origin: string;
     originCode: string;
