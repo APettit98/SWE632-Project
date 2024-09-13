@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AppService } from '../app.service';
 import { FlightSearch } from "../flightSearch";
-import * as flightData from '../flightData.json';
 import { Flight } from '../flight';
 import { MatCardModule } from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -24,10 +23,12 @@ export class FlightSelectorComponent {
 
   search: FlightSearch = {origin: "", destination: "", departureDate: ""};
   booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", bookingCode: "", fareClass: ""};
+  flightData: any = {};
   availableFlights: Flight[] = [];
   constructor(private appService:AppService) {
     this.appService.getSearch.subscribe(s => this.search = s);
     this.appService.getBooking.subscribe(b => this.booking = b);
+    this.appService.getFlightData.subscribe(d => this.flightData = d);
   }
 
   convertTime(time: string): string {
@@ -57,7 +58,7 @@ export class FlightSelectorComponent {
   }
 
   ngOnInit(): void {
-    const flightOptions: Flight[] = flightData.flights;
+    const flightOptions: Flight[] = this.flightData.flights;
     const dayOfWeek = new Date(this.search.departureDate).toLocaleString('en-us', {weekday: 'long'});
     this.availableFlights = flightOptions.filter((flight) => {
       if (flight.origin !== this.search.origin) {

@@ -41,7 +41,7 @@
                             <div>Duration: {{convertDuration(flight.duration)}}</div>
                         </mat-card-content>
                         <mat-card-actions>
-                            <button mat-stroked-button>Select</button>
+                            <button mat-stroked-button (click)="selectFlight(flight.id, 'Business')" [routerLink]="['/reserve']">Select</button>
                         </mat-card-actions>
                     </mat-card>
                 </mat-grid-tile>
@@ -57,7 +57,7 @@
                             <div>Duration: {{convertDuration(flight.duration)}}</div>
                         </mat-card-content>
                         <mat-card-actions>
-                            <button mat-stroked-button>Select</button>
+                            <button mat-stroked-button (click)="selectFlight(flight.id, 'First')" [routerLink]="['/reserve']">Select</button>
                         </mat-card-actions>
                     </mat-card>
                 </mat-grid-tile>

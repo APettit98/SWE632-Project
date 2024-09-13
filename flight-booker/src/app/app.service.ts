@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { FlightSearch } from "./flightSearch";
 import { Booking } from "./booking";
+import * as flightData from "./flightData.json";
 
 
 @Injectable({
@@ -24,9 +25,11 @@ export class AppService {
         bookingCode: "",
         fareClass: ""
     });
+    private flightData = new BehaviorSubject(flightData);
     
     getSearch = this.search.asObservable();
     getBooking = this.booking.asObservable();
+    getFlightData = this.flightData.asObservable();
 
     constructor() {}
 
@@ -36,5 +39,9 @@ export class AppService {
 
     setBooking(booking: Booking) {
         this.booking.next(booking);
+    }
+
+    setFlightData(data: any) {
+        this.flightData.next(data);
     }
 }
