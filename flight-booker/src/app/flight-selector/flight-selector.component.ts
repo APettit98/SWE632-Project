@@ -27,7 +27,7 @@ import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
 export class FlightSelectorComponent {
 
   search: FlightSearch = {origin: "", destination: "", departureDate: ""};
- // booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", bookingCode: "", fareClass: ""};
+  booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", bookingCode: "", fareClass: ""};
   availableFlights: Flight[] = [];
   availableAirlines: string[] = [];
   minPrice: number = 0;
@@ -39,7 +39,7 @@ export class FlightSelectorComponent {
 
   constructor(private appService:AppService) {
     this.appService.getSearch.subscribe(s => this.search = s);
-   // this.appService.getBooking.subscribe(b => this.booking = b);
+    this.appService.getBooking.subscribe(b => this.booking = b);
   }
 
   convertTime(time: string): string {
