@@ -9,7 +9,7 @@ import { NgFor } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-// import { Booking } from '../booking';
+import { Booking } from '../booking';
 import { RouterLink } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -56,7 +56,7 @@ export class FlightSelectorComponent {
   }
 
  selectFlight(id: string, fareClass: string){
-    /*this.appService.setBooking({
+    this.appService.setBooking({
       flightId: id, 
       firstName: "", 
       lastName: "", 
@@ -64,8 +64,6 @@ export class FlightSelectorComponent {
       bookingCode: "", 
       fareClass: fareClass
     });
-
-    console.log("Booking: ", this.booking);*/
   }
 
   initialFilter(): Flight[] {
