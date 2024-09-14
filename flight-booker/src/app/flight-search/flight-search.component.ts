@@ -2,30 +2,45 @@ import { Component } from '@angular/core';
 import { AppService } from '../app.service';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
+import { CommonModule, NgFor } from '@angular/common';
+import * as flightData from '../flightData.json';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlightSearch } from '../flightSearch';
 
 @Component({
   selector: 'app-flight-search',
   standalone: true,
-  imports: [MatButtonModule, RouterLink],
+  imports: [MatButtonModule, RouterLink, NgFor, CommonModule, MatFormFieldModule, MatSelectModule, FormsModule, ReactiveFormsModule, MatInputModule],
   templateUrl: './flight-search.component.html',
   styleUrl: './flight-search.component.css'
 })
 export class FlightSearchComponent {
 
+  cities = flightData.cities;
+  dates: String [] = []
+  originFormControl = new FormControl('', Validators.required);
+  destinationFormControl = new FormControl('', Validators.required);
+  dateFormControl = new FormControl('', Validators.required);
+
+  search: FlightSearch = {origin: "", destination: "", departureDate: ""};
+
   constructor(private appService:AppService) {
+    this.appService.getSearch.subscribe(s => this.search = s);
   }
 
   ngOnInit(): void {
-
+    let date = new Date();
+    for (let i=0; i<7; i++) {
+      this.dates.push(date.toLocaleString("en-US", {month: "numeric", day: "numeric"}));
+      date.setDate(date.getDate() + 1);
+    }
   }
 
   updateSearch() {
-    const exampleSearch = {
-      origin: "New York",
-      destination: "Los Angeles",
-      departureDate: "2024-12-01"
-    }
-    this.appService.setSearch(exampleSearch);
+   this.appService.setSearch(this.search);
   }
 
 }
