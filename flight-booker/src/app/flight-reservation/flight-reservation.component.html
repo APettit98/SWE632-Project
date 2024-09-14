@@ -1,0 +1,30 @@
+<h1>Reserve Your Flight</h1>
+<p>Please enter your personal information</p>
+<mat-form-field>
+    <input 
+        matInput 
+        placeholder="First Name"
+        [formControl]="firstName"
+        required
+    />
+</mat-form-field>
+<mat-form-field>
+    <input 
+        matInput 
+        placeholder="Last Name"
+        [formControl]="lastName"
+        required
+    />
+</mat-form-field>
+<mat-form-field>
+    <input 
+        matInput 
+        placeholder="Email"
+        [formControl]="email"
+        required
+    />
+</mat-form-field>
+<div>
+    <button mat-stroked-button (click)="createBooking()" [routerLink]="['/confirm']">Reserve Flight</button>
+    <button mat-flat-button [routerLink]="['/select']">Cancel</button>
+</div>
