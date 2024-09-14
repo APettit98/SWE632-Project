@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AppService } from '../app.service';
 import { FlightSearch } from "../flightSearch";
-import * as flightData from '../flightData.json';
 import { Flight } from '../flight';
 import { MatCardModule } from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -15,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
+import * as utils from '../utils';
 
 
 @Component({
@@ -28,6 +28,7 @@ export class FlightSelectorComponent {
 
   search: FlightSearch = {origin: "", destination: "", departureDate: ""};
   booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", bookingCode: "", fareClass: ""};
+  flightData: any = {};
   availableFlights: Flight[] = [];
   availableAirlines: string[] = [];
   minPrice: number = 0;
@@ -36,24 +37,16 @@ export class FlightSelectorComponent {
   selectedMaxPrice: number = 0;
   chosenAirlines = new FormControl([]);
   sortOption = new FormControl('');
+  convertTime = utils.convertTime;
+  convertDuration = utils.convertDuration;
 
   constructor(private appService:AppService) {
     this.appService.getSearch.subscribe(s => this.search = s);
     this.appService.getBooking.subscribe(b => this.booking = b);
+    this.appService.getFlightData.subscribe(d => this.flightData = d);
   }
 
-  convertTime(time: string): string {
-    const [hours, minutes] = time.split(":");
-    const ampm = parseInt(hours) >= 12 ? 'pm' : 'am';
-    const adjustedHours = parseInt(hours) % 12;
-    return `${adjustedHours}:${minutes} ${ampm}`;
-  }
 
-  convertDuration(duration: number): string {
-    const hours = Math.floor(duration / 60);
-    const minutes = duration % 60;
-    return `${hours}hr ${minutes}m`;
-  }
 
  selectFlight(id: string, fareClass: string){
     this.appService.setBooking({
@@ -68,7 +61,7 @@ export class FlightSelectorComponent {
 
   initialFilter(): Flight[] {
     const dayOfWeek = new Date(this.search.departureDate).toLocaleString('en-us', {weekday: 'long'});
-    return flightData.flights.filter((flight) => {
+    return this.flightData.flights.filter((flight: Flight) => {
       if (flight.origin !== this.search.origin) {
         return false;
       }
