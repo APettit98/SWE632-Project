@@ -24,4 +24,7 @@
         required
     />
 </mat-form-field>
-<button mat-stroked-button (click)="createBooking()">Reserve Flight</button>
+<div>
+    <button mat-stroked-button (click)="createBooking()" [routerLink]="['/confirm']">Reserve Flight</button>
+    <button mat-flat-button [routerLink]="['/select']">Cancel</button>
+</div>

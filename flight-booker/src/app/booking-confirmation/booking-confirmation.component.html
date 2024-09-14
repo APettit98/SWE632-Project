@@ -1,0 +1,21 @@
+<h1>Your Flight is Reserved</h1>
+<div class="reservation-details">
+    <mat-card appearance="outlined">
+        <mat-card-header>
+            <mat-card-title>Reservation Details</mat-card-title>
+            <mat-card-subtitle>Reservation Code: {{booking.bookingCode}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <div>Flight: {{bookedFlight.airline}} {{bookedFlight.originCode}} to {{bookedFlight.destinationCode}}</div>
+            <div>Depart: {{convertTime(bookedFlight.departureTime)}}</div>
+            <div>Arrive: {{convertTime(bookedFlight.arrivalTime)}}</div>
+            <div>Class: {{booking.fareClass}}</div>
+            <div>Price: ${{farePaid}}</div>
+            <div>Passenger: {{booking.firstName}} {{booking.lastName}}</div>
+            <div>Email: {{booking.email}}</div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-stroked-button [routerLink]="['/']">Exit</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

@@ -6,11 +6,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-flight-reservation',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatGridListModule, MatButtonModule],
+  imports: [MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatGridListModule, MatButtonModule, RouterLink],
   templateUrl: './flight-reservation.component.html',
   styleUrl: './flight-reservation.component.css'
 })
@@ -53,9 +54,6 @@ export class FlightReservationComponent {
     });
     this.flightData.bookings.push(this.booking);
     this.appService.setFlightData(this.flightData);
-    console.log("Flight booked!");
-    console.log(this.flightData.bookings);
-    console.log(this.flightData.bookingCodes);
   }
 
 }
