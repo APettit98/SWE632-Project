@@ -1,3 +1,37 @@
-<p>flight-search works!</p>
-<button mat-flat-button (click)="updateSearch()" [routerLink]="['/select']">update search</button>
-<button mat-flat-button [routerLink]="['/select']">Go to search</button>
+<h3>Welcome</h3>
+
+<p>Flight Browser</p>
+<mat-form-field>
+    <mat-label>Origin</mat-label>
+    <select [(ngModel)]="search.origin" matNativeControl required [formControl]="originFormControl">
+        <option label="---"></option>
+        <option *ngFor="let city of cities">{{ city }}</option>
+    </select>
+    @if (originFormControl.hasError('required')) {
+        <mat-error>This field is required</mat-error>
+    }
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>Destination</mat-label>
+    <select [(ngModel)]="search.destination" matNativeControl required [formControl]="destinationFormControl">
+        <option label="---"></option>
+        <option *ngFor="let city of cities">{{ city }}</option>
+    </select>
+    @if (destinationFormControl.hasError('required')) {
+        <mat-error>This field is required</mat-error>
+    }
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>Date</mat-label>
+    <select [(ngModel)]="search.departureDate" matNativeControl required [formControl]="dateFormControl">
+        <option label="---"></option>
+        <option *ngFor="let date of dates">{{ date }}</option>
+    </select>
+    @if (dateFormControl.hasError('required')) {
+        <mat-error>This field is required</mat-error>
+    }
+</mat-form-field>
+
+<button mat-flat-button (click)="updateSearch()" [routerLink]="['/select']" [disabled]="originFormControl.hasError('required') || destinationFormControl.hasError('required') || dateFormControl.hasError('required')">View Flights</button>
