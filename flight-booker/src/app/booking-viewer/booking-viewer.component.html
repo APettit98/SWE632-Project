@@ -1,0 +1,13 @@
+<h3>View Reservation</h3>
+<p>Enter your last name and booking code for reservation:</p>
+<div class="bookingRequest">
+    <mat-form-field >
+        <mat-label>Last Name</mat-label>
+        <input [(ngModel)]="name" matInput>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Booking Code</mat-label>
+        <input [(ngModel)]="code" matInput>
+    </mat-form-field>
+</div>
+<button mat-flat-button [disabled]="isValid()" (click)="selectBooking()" [routerLink]="['/details']">View Booking Details</button>

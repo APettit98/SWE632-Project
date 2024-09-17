@@ -1,0 +1,13 @@
+<h3>Confirm Cancellation</h3>
+<div class="cancelMenu">
+    <p><b>Reservation {{ booking.bookingCode }}</b></p>
+    <p>
+        {{ bookedFlight.airline }} {{ bookedFlight.originCode }}
+        <mat-icon aria-hidden="false" fontIcon="trending_flat"></mat-icon>
+        {{ bookedFlight.destinationCode }}
+    </p>
+    <p>{{ dates[bookedFlight.date] }} {{ convertTime(bookedFlight.departureTime) }} - {{ convertTime(bookedFlight.arrivalTime) }}</p>
+    <p>Refund: ${{ farePaid }}</p>
+    <button mat-stroked-button (click)="cancelBooking()" [routerLink]="['/cancelConfirm']">Cancel Flight</button>
+    <button mat-flat-button [routerLink]="['/booking']">Do Not Cancel</button>
+</div>
