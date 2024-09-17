@@ -3,7 +3,6 @@ import { AppService } from '../app.service';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { CommonModule, NgFor } from '@angular/common';
-import * as flightData from '../flightData.json';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -19,7 +18,7 @@ import { FlightSearch } from '../flightSearch';
 })
 export class FlightSearchComponent {
 
-  cities = flightData.cities;
+  flightData: any = {}
   dates: String [] = []
   originFormControl = new FormControl('', Validators.required);
   destinationFormControl = new FormControl('', Validators.required);
@@ -29,6 +28,7 @@ export class FlightSearchComponent {
 
   constructor(private appService:AppService) {
     this.appService.getSearch.subscribe(s => this.search = s);
+    this.appService.getFlightData.subscribe(d => this.flightData = d);
   }
 
   ngOnInit(): void {
