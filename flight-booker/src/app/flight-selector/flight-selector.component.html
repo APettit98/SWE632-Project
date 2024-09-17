@@ -1,4 +1,4 @@
-<h1>Available Flights</h1>
+<h3>Available Flights</h3>
 <div class="filter-and-sort">
     <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -111,3 +111,6 @@
         </mat-expansion-panel>
     </mat-accordion>
 </div>
+@if (availableFlights.length == 0) {
+    <p>No flights found.</p>
+}

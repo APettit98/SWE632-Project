@@ -5,7 +5,7 @@
     <mat-label>Origin</mat-label>
     <select [(ngModel)]="search.origin" matNativeControl required [formControl]="originFormControl">
         <option label="---"></option>
-        <option *ngFor="let city of cities">{{ city }}</option>
+        <option *ngFor="let city of flightData.cities">{{ city }}</option>
     </select>
     @if (originFormControl.hasError('required')) {
         <mat-error>This field is required</mat-error>
@@ -16,7 +16,7 @@
     <mat-label>Destination</mat-label>
     <select [(ngModel)]="search.destination" matNativeControl required [formControl]="destinationFormControl">
         <option label="---"></option>
-        <option *ngFor="let city of cities">{{ city }}</option>
+        <option *ngFor="let city of flightData.cities">{{ city }}</option>
     </select>
     @if (destinationFormControl.hasError('required')) {
         <mat-error>This field is required</mat-error>
@@ -34,4 +34,6 @@
     }
 </mat-form-field>
 
-<button mat-flat-button (click)="updateSearch()" [routerLink]="['/select']" [disabled]="originFormControl.hasError('required') || destinationFormControl.hasError('required') || dateFormControl.hasError('required')">View Flights</button>
+<div class="searchButton">
+    <button mat-flat-button (click)="updateSearch()" [routerLink]="['/select']" [disabled]="originFormControl.hasError('required') || destinationFormControl.hasError('required') || dateFormControl.hasError('required')">View Flights</button>
+</div>
