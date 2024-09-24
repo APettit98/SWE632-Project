@@ -36,7 +36,7 @@ jobs:
           npm run ng --build --base-href="/$VERSION/"
           git clone --branch gh-pages https://github.com/APettit98/SWE632-Project.git gh-pages
           rm -rf gh-pages/$VERSION
-          cp -r  ./flight-booker/dist/flight-booker gh-pages/$VERSION
+          cp -r  ./dist/flight-booker gh-pages/$VERSION
           cd gh-pages
           git add .
           git commit -m "Deploy verion $VERSION to GitHubPages"
