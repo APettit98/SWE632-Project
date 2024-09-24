@@ -57,6 +57,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
+          echo "TEST THIS IS A GITHUB TOKEN ${{ GH_TOKEN }}"
           cd gh-pages
           git add .
           git commit -m "Deploy version ${{ env.VERSION }} of the app"
