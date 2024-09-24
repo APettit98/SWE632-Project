@@ -5,7 +5,7 @@ on:
     branches:
       - main  # Trigger on push to the main branch
 env:
-  VERSION: "2.0.0"
+  VERSION: "1.0.0"
 
 jobs:
   build-and-deploy:
@@ -37,5 +37,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           BRANCH: gh-pages
           FOLDER: ./flight-booker/dist/flight-booker/browser
-          TARGET_FOLDER: .
+          TARGET_FOLDER: /${{ env.VERSION }}
           
