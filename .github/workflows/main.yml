@@ -57,9 +57,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          git config --global user.name "APettit98"
-          git config --global user.email "aedan@pettitpack.net"
           cd gh-pages
           git add .
           git commit -m "Deploy version ${{ env.VERSION }} of the app"
-          git push
+          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git gh-pages
