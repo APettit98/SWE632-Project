@@ -8,7 +8,7 @@ import { BookingConfirmationComponent } from './booking-confirmation/booking-con
 
 const routes: Routes = [
   {
-    path: '1.0.0',
+    path: '',
     component: FlightSearchComponent
   },
   {

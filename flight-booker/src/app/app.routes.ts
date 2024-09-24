@@ -10,7 +10,7 @@ import { CancelConfirmationComponent } from './cancel-confirmation/cancel-confir
 
 export const routes: Routes = [
     {
-        path: '1.0.0',
+        path: '',
         component: FlightSearchComponent
     },
     {
