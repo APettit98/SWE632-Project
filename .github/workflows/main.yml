@@ -31,7 +31,9 @@ jobs:
         env: 
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         working-directory: ./flight-booker
-        run: npm run ng --build --base-href="/$VERSION/"
+        run: |
+          npm install
+          npm run ng --build --base-href="/$VERSION/"
 
       # {%}
       - name: Deploy
