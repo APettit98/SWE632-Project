@@ -24,26 +24,19 @@ jobs:
       - name: Setup Node.js 20.15.0
         uses: actions/setup-node@v3
         with:
-          node-version: 20.15.0
+          node-version: 20.15.0  
 
       # {4}
-      - name: Build
-        env: 
+      - name: Build & Deploy
+        env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         working-directory: ./flight-booker
         run: |
           npm install
           npm run ng --build --base-href="/$VERSION/"
-
-      # {%}
-      - name: Deploy
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        working-directory: ./flight-booker
-        run: |
           git clone --branch gh-pages https://github.com/APettit98/SWE632-Project.git gh-pages
           rm -rf gh-pages/$VERSION
-          cp -r  flight-booker/dist/flight-booker gh-pages/$VERSION
+          cp -r  ./flight-booker/dist/flight-booker gh-pages/$VERSION
           cd gh-pages
           git add .
           git commit -m "Deploy verion $VERSION to GitHubPages"
