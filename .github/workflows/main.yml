@@ -27,6 +27,7 @@ jobs:
 
       # Step 3: Install & build
       - name: Install and Build
+        working-directory: ./flight-booker
         run: |
           npm install
           npm run build
