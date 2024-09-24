@@ -10,10 +10,6 @@ jobs:
     name: Build and Deploy Angular App
     runs-on: ubuntu-latest
 
-    env:
-      # Set the version manually here
-      VERSION: "1.0.0"
-
     steps:
       # Step 1: Checkout the source code
       - name: Checkout the repository
@@ -38,7 +34,7 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: ./flight-booker/dist/flight-booker
+          FOLDER: ./flight-booker/dist/flight-booker/browser
           TARGET_FOLDER: .
           CLEAN: true
           
