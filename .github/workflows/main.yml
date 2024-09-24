@@ -38,8 +38,8 @@ jobs:
       # Step 5: Clone the gh-pages branch
       - name: Clone gh-pages branch
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
+          git config --global user.name "APettit98"
+          git config --global user.email "aedan@pettitpack.net"
 
           # Clone the gh-pages branch into a separate directory
           git clone --branch gh-pages https://github.com/APettit98/SWE632-Project.git gh-pages
