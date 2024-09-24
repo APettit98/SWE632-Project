@@ -37,5 +37,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           BRANCH: gh-pages
           FOLDER: ./flight-booker/dist/flight-booker/browser
-          TARGET_FOLDER: $ {{ VERSION }}
+          TARGET_FOLDER: /${{ env.VERSION }}
           
