@@ -35,6 +35,7 @@ jobs:
       # Step 4: Deploy to GitHub Pages
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
+        working-directory: ./flight-booker
         with:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           BRANCH: gh-pages
