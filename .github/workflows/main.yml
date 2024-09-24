@@ -27,19 +27,22 @@ jobs:
           node-version: 20.15.0
 
       # {4}
-      - name: Prepare and deploy
+      - name: Build
+          env:
+            GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          working-directory: ./flight-booker
+          run: npm run ng --build --base-href="/$VERSION/"
+
+      # {%}
+      - name: Deploy
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         working-directory: ./flight-booker
         run: |
-          npm install
-          ###
-          # Configure Angular first
-          ####
-          # npm test -- --watch=false --progress=false --browsers=ChromeHeadlessCI
-          # npm run webdriver-update-ci
-          # npm run e2d -- --protractor-config=e2e/protractor-ci.conf.js --webdriver-update=false
-          npm run ng -- build --base-href="/$VERSION/"
-          ####
-          npm run ng -- deploy --repo="https://github.com/APettit98/SWE632-Project.git" --base-href="/$VERSION/" --name="APettit98" --email="aedan@pettitpack.net"
-    
+          git clone --branch gh-pages https://github.com/APettit98/SWE632-Project.git gh-pages
+          rm -rf gh-pages/$VERSION
+          cp -r  flight-booker/dist/flight-booker gh-pages/$VERSION
+          cd gh-pages
+          git add .
+          git commit -m "Deploy verion $VERSION to GitHubPages"
+          git push
