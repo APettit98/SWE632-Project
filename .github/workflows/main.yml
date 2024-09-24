@@ -50,7 +50,7 @@ jobs:
           # Create versioned directory and copy build output
           rm -rf gh-pages/${{ env.VERSION }}  # Clear previous version if exists
           mkdir -p gh-pages/${{ env.VERSION }}  # Create directory for this version
-          cp -r angular-app/dist/your-app-name/* gh-pages/${{ env.VERSION }}  # Copy files
+          cp -r flight-booker/dist/flight-booker/* gh-pages/${{ env.VERSION }}  # Copy files
 
       # Step 7: Commit and push changes to gh-pages
       - name: Deploy to GitHub Pages
