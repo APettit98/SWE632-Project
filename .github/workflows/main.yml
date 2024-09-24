@@ -54,6 +54,8 @@ jobs:
 
       # Step 7: Commit and push changes to gh-pages
       - name: Deploy to GitHub Pages
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           cd gh-pages
           git add .
