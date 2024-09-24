@@ -25,39 +25,19 @@ jobs:
         with:
           node-version: '20.15.0'
 
-      # Step 3: Install npm dependencies
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./flight-booker
-
-      # Step 4: Build the Angular app with a version-specific base-href
-      - name: Build Angular App
-        run: ./node_modules/.bin/ng build --base-href="/${{ env.VERSION }}/"
-        working-directory: ./flight-booker
-
-      # Step 5: Clone the gh-pages branch
-      - name: Clone gh-pages branch
+      # Step 3: Install & build
+      - name: Install and Build
         run: |
-          git config --global user.name "APettit98"
-          git config --global user.email "aedan@pettitpack.net"
+          npm install
+          npm run build
 
-          # Clone the gh-pages branch into a separate directory
-          git clone --branch gh-pages https://github.com/APettit98/SWE632-Project.git gh-pages
-
-      # Step 6: Copy build output to the gh-pages branch in a version-specific directory
-      - name: Copy Build to gh-pages
-        run: |
-          # Create versioned directory and copy build output
-          rm -rf gh-pages/${{ env.VERSION }}  # Clear previous version if exists
-          mkdir -p gh-pages/${{ env.VERSION }}  # Create directory for this version
-          cp -r flight-booker/dist/flight-booker/browser/* gh-pages/${{ env.VERSION }}  # Copy files
-
-      # Step 7: Commit and push changes to gh-pages
-      - name: Deploy to GitHub Pages
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          cd gh-pages
-          git add -A
-          git commit -m "Deploy version ${{ env.VERSION }} of the app"
-          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git gh-pages
+      # Step 4: Deploy to GitHub Pages
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: dist/flight-booker
+          TARGET_FOLDER: .
+          CLEAN: true
+          
