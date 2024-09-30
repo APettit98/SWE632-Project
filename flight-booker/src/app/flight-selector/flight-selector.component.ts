@@ -16,12 +16,13 @@ import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
 import * as utils from '../utils';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @Component({
   selector: 'app-flight-selector',
   standalone: true,
-  imports: [MatExpansionModule, MatCardModule, MatGridListModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatSelectModule, MatSliderModule, FormsModule, ReactiveFormsModule, MatExpansionModule, MatCheckboxModule, NgFor, NgIf, RouterLink],
+  imports: [MatExpansionModule, MatCardModule, MatGridListModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatSelectModule, MatSliderModule, FormsModule, ReactiveFormsModule, MatExpansionModule, MatCheckboxModule, NgFor, NgIf, RouterLink, MatProgressSpinnerModule],
   templateUrl: './flight-selector.component.html',
   styleUrl: './flight-selector.component.css',
 })
@@ -30,6 +31,7 @@ export class FlightSelectorComponent {
   search: FlightSearch = {origin: "", destination: "", departureDate: ""};
   booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", bookingCode: "", fareClass: ""};
   flightData: any = {};
+  loading = false;
   availableFlights: Flight[] = [];
   availableAirlines: string[] = [];
   maxPrice: number = 0;
@@ -157,17 +159,25 @@ export class FlightSelectorComponent {
   }
 
   sortFlights() {
-    switch (this.sortOption.value) {
-      case "price": 
-        this.availableFlights.sort(this.sortByPrice);
-        break;
-      case "duration":
-        this.availableFlights.sort(this.sortByDuration);
-        break;
-      case "departureTime":
-        this.availableFlights.sort(this.sortByDepartureTime);
-        break;
-    }
+    this.loading = true;
+    setTimeout(() => 
+      {
+        switch (this.sortOption.value) {
+          case "price": 
+            this.availableFlights.sort(this.sortByPrice);
+            this.loading = false;
+            break;
+          case "duration":
+            this.availableFlights.sort(this.sortByDuration);
+            this.loading = false;
+            break;
+          case "departureTime":
+            this.availableFlights.sort(this.sortByDepartureTime);
+            this.loading = false
+            break;
+        }
+      },
+      250);
   } 
 
   sortByPrice(a: Flight, b: Flight): number {
@@ -196,6 +206,5 @@ export class FlightSelectorComponent {
     }
     return 0;
   }
-
 
 }

@@ -7,6 +7,12 @@
         [formControl]="firstName"
         required
     />
+    @if (firstName.hasError('required')) {
+        <mat-error>This field is required</mat-error>
+    }
+    @if (firstName.hasError('pattern')) {
+        <mat-error class="name-error">Name can only have alphabetical characters, spaces, apostrophes, and hyphens</mat-error>
+    }
 </mat-form-field>
 <mat-form-field>
     <input 
@@ -15,6 +21,12 @@
         [formControl]="lastName"
         required
     />
+    @if (lastName.hasError('required')) {
+        <mat-error>This field is required</mat-error>
+    }
+    @if (lastName.hasError('pattern')) {
+        <mat-error class="name-error">Name can only have alphabetical characters, spaces, apostrophes, and hyphens</mat-error>
+    }
 </mat-form-field>
 <mat-form-field>
     <input 
@@ -22,9 +34,16 @@
         placeholder="Email"
         [formControl]="email"
         required
+        email
     />
+    @if (email.hasError('required')) {
+        <mat-error>This field is required</mat-error>
+    }
+    @if (email.hasError('email')) {
+        <mat-error>Please enter a valid email</mat-error>
+    }
 </mat-form-field>
 <div>
-    <button mat-stroked-button (click)="createBooking()" [routerLink]="['/confirm']">Reserve Flight</button>
     <button mat-flat-button [routerLink]="['/select']">Cancel</button>
+    <button mat-stroked-button (click)="createBooking()" [routerLink]="['/confirm']" [disabled]="firstName.hasError('required') || lastName.hasError('required') || email.hasError('required') || email.hasError('email') || firstName.hasError('pattern') || lastName.hasError('pattern')">Reserve Flight</button>
 </div>
