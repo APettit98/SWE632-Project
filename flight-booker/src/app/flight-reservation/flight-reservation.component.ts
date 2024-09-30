@@ -19,8 +19,8 @@ export class FlightReservationComponent {
 
   booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", bookingCode: "", fareClass: ""};
   flightData: any = {};
-  readonly firstName = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z -]*')]);
-  readonly lastName = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z -]*')]);
+  readonly firstName = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z -\']*')]);
+  readonly lastName = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z -\']*')]);
   readonly email = new FormControl('', [Validators.required, Validators.email]);
 
   constructor(private appService: AppService) {
