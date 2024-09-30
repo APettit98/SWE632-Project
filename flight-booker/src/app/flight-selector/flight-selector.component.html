@@ -57,6 +57,7 @@
         </mat-grid-list>
     </mat-expansion-panel>
 </div>
+<mat-spinner *ngIf="this.loading" [diameter]="50" class="loading-spinner"></mat-spinner>
 <div class="flight-selection">
     <mat-accordion multi>
         <mat-expansion-panel *ngFor="let flight of availableFlights">

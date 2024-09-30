@@ -32,6 +32,7 @@ export class FlightSearchComponent {
   }
 
   ngOnInit(): void {
+    this.appService.setSearch({origin: "", destination: "", departureDate: ""});
     let date = new Date();
     for (let i=0; i<7; i++) {
       this.dates.push(date.toLocaleString("en-US", {month: "numeric", day: "numeric"}));
