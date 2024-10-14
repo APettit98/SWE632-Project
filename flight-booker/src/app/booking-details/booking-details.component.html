@@ -3,6 +3,7 @@
     <mat-card appearance="outlined">
         <mat-card-header><b>Reservation {{ booking.bookingCode }}</b></mat-card-header>
         <mat-card-content>
+            <div>Date: {{weekdayToDate(bookedFlight.date)}}</div>
             <div>Flight: {{bookedFlight.airline}} {{bookedFlight.originCode}} to {{bookedFlight.destinationCode}}</div>
             <div>Depart: {{convertTime(bookedFlight.departureTime)}}</div>
             <div>Arrive: {{convertTime(bookedFlight.arrivalTime)}}</div>
