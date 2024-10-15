@@ -20,6 +20,7 @@ export class BookingConfirmationComponent {
   bookedFlight: Flight = {id: "", date: "", origin: "", originCode: "", destination: "", destinationCode: "", departureTime: "", arrivalTime: "", duration: 0, airline: "", economyPrice: 0, businessPrice: 0, firstPrice: 0};
   farePaid: number = 0;
   convertTime = utils.convertTime;
+  weekdayToDate = utils.weekdayToDate;
 
   constructor(private appService: AppService) {
     this.appService.getBooking.subscribe(b => this.booking = b);
