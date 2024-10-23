@@ -42,7 +42,6 @@ export class BookingConfirmationComponent {
       default:
         this.farePaid = 0;
     }
-    console.log("Booking: ", this.booking);
   }
 
   ngOnDestroy(): void {
