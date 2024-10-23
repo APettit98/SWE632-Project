@@ -28,7 +28,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class FlightSelectorComponent {
 
-  search: FlightSearch = {origin: "", destination: "", departureDate: ""};
+  search: FlightSearch = {origin: {"name": "", "state": "", "stateCode": ""}, destination: {"name": "", "state": "", "stateCode": ""}, departureDate: ""};
   booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", bookingCode: "", fareClass: ""};
   flightData: any = {};
   loading = false;
@@ -67,10 +67,10 @@ export class FlightSelectorComponent {
   initialFilter(): Flight[] {
     const dayOfWeek = new Date(this.search.departureDate + '/' + (new Date().toLocaleDateString('en-us', {year: "numeric"}))).toLocaleString('en-us', {weekday: 'long'});
     return this.flightData.flights.filter((flight: Flight) => {
-      if (flight.origin !== this.search.origin) {
+      if (flight.origin.name !== this.search.origin.name) {
         return false;
       }
-      if (flight.destination !== this.search.destination) {
+      if (flight.destination.name !== this.search.destination.name) {
         return false;
       }
       if (flight.date !== dayOfWeek) {
