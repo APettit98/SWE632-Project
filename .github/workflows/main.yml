@@ -5,7 +5,7 @@ on:
     branches:
       - main  # Trigger on push to the main branch
 env:
-  VERSION: "2.0.0"
+  VERSION: "3.0.0"
 
 jobs:
   build-and-deploy:
