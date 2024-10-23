@@ -1,5 +1,7 @@
+import { City } from "./city";
+
 export interface FlightSearch {
-    origin: string;
-    destination: string;
+    origin: City;
+    destination: City;
     departureDate: string;
 }

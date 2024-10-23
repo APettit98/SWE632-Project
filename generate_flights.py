@@ -8,31 +8,31 @@ FLIGHT_SPEED = 500
 
 # List of cities with their coordinates and airport codes
 cities = [
-    {"name": "New York", "code": "JFK", "lat": 40.6413, "lon": -73.7781},
-    {"name": "Los Angeles", "code": "LAX", "lat": 33.9416, "lon": -118.4085},
-    {"name": "Chicago", "code": "ORD", "lat": 41.9742, "lon": -87.9073},
-    {"name": "Houston", "code": "IAH", "lat": 29.9902, "lon": -95.3368},
-    {"name": "Phoenix", "code": "PHX", "lat": 33.4342, "lon": -112.0116},
-    {"name": "Philadelphia", "code": "PHL", "lat": 39.8744, "lon": -75.2424},
-    {"name": "San Antonio", "code": "SAT", "lat": 29.5337, "lon": -98.4698},
-    {"name": "San Diego", "code": "SAN", "lat": 32.7338, "lon": -117.1933},
-    {"name": "Dallas", "code": "DFW", "lat": 32.8998, "lon": -97.0403},
-    {"name": "San Jose", "code": "SJC", "lat": 37.3639, "lon": -121.9289},
-    {"name": "Austin", "code": "AUS", "lat": 30.1975, "lon": -97.6664},
-    {"name": "Jacksonville", "code": "JAX", "lat": 30.4941, "lon": -81.6879},
-    {"name": "Fort Worth", "code": "DFW", "lat": 32.8998, "lon": -97.0403},
-    {"name": "Columbus", "code": "CMH", "lat": 39.9980, "lon": -82.8919},
-    {"name": "Charlotte", "code": "CLT", "lat": 35.2140, "lon": -80.9431},
-    {"name": "Indianapolis", "code": "IND", "lat": 39.7173, "lon": -86.2944},
-    {"name": "San Francisco", "code": "SFO", "lat": 37.6213, "lon": -122.3790},
-    {"name": "Seattle", "code": "SEA", "lat": 47.4502, "lon": -122.3088},
-    {"name": "Denver", "code": "DEN", "lat": 39.8561, "lon": -104.6737},
-    {"name": "Washington", "code": "DCA", "lat": 38.8512, "lon": -77.0402},
-    {"name": "Boston", "code": "BOS", "lat": 42.3656, "lon": -71.0096},
-    {"name": "El Paso", "code": "ELP", "lat": 31.8075, "lon": -106.3780},
-    {"name": "Nashville", "code": "BNA", "lat": 36.1263, "lon": -86.6774},
-    {"name": "Detroit", "code": "DTW", "lat": 42.2162, "lon": -83.3554},
-    {"name": "Portland", "code": "PDX", "lat": 45.5898, "lon": -122.5951}
+    {"name": "New York", "state": "New York", "stateCode": "NY","code": "JFK", "lat": 40.6413, "lon": -73.7781},
+    {"name": "Los Angeles", "state": "California", "stateCode": "CA", "code": "LAX", "lat": 33.9416, "lon": -118.4085},
+    {"name": "Chicago", "state": "Illinois", "stateCode": "IL", "code": "ORD", "lat": 41.9742, "lon": -87.9073},
+    {"name": "Houston", "state": "Texas", "stateCode": "TX", "code": "IAH", "lat": 29.9902, "lon": -95.3368},
+    {"name": "Phoenix", "state": "Arizona", "stateCode": "AZ", "code": "PHX", "lat": 33.4342, "lon": -112.0116},
+    {"name": "Philadelphia", "state": "Pennsylvania", "stateCode": "PA", "code": "PHL", "lat": 39.8744, "lon": -75.2424},
+    {"name": "San Antonio", "state": "Texas", "stateCode": "TX", "code": "SAT", "lat": 29.5337, "lon": -98.4698},
+    {"name": "San Diego", "state": "California", "stateCode": "CA", "code": "SAN", "lat": 32.7338, "lon": -117.1933},
+    {"name": "Dallas", "state": "Texas", "stateCode": "TX", "code": "DFW", "lat": 32.8998, "lon": -97.0403},
+    {"name": "San Jose", "state": "California", "stateCode": "CA", "code": "SJC", "lat": 37.3639, "lon": -121.9289},
+    {"name": "Austin", "state": "Texas", "stateCode": "TX", "code": "AUS", "lat": 30.1975, "lon": -97.6664},
+    {"name": "Jacksonville", "state": "Florida", "stateCode": "FL", "code": "JAX", "lat": 30.4941, "lon": -81.6879},
+    {"name": "Columbus", "state": "Ohio", "stateCode": "OH", "code": "CMH", "lat": 39.9980, "lon": -82.8919},
+    {"name": "Charlotte", "state": "North Carolina", "stateCode": "NC", "code": "CLT", "lat": 35.2140, "lon": -80.9431},
+    {"name": "Indianapolis", "state": "Indiana", "stateCode": "IN", "code": "IND", "lat": 39.7173, "lon": -86.2944},
+    {"name": "San Francisco", "state": "California", "stateCode": "CA", "code": "SFO", "lat": 37.6213, "lon": -122.3790},
+    {"name": "Seattle", "state": "Washington", "stateCode": "WA", "code": "SEA", "lat": 47.4502, "lon": -122.3088},
+    {"name": "Denver", "state": "Colorado", "stateCode": "CO", "code": "DEN", "lat": 39.8561, "lon": -104.6737},
+    {"name": "Washington", "state": "District of Columbia", "stateCode": "DC", "code": "DCA", "lat": 38.8512, "lon": -77.0402},
+    {"name": "Boston", "state": "Massachusettes", "stateCode": "MA", "code": "BOS", "lat": 42.3656, "lon": -71.0096},
+    {"name": "El Paso", "state": "Texas", "stateCode": "TX", "code": "ELP", "lat": 31.8075, "lon": -106.3780},
+    {"name": "Nashville", "state": "Tennessee", "stateCode": "TN", "code": "BNA", "lat": 36.1263, "lon": -86.6774},
+    {"name": "Detroit", "state": "Michigan", "stateCode": "MI", "code": "DTW", "lat": 42.2162, "lon": -83.3554},
+    {"name": "Portland", "state": "Oregon", "stateCode": "OR", "code": "PDX", "lat": 45.5898, "lon": -122.5951},
+    {"name": "Baltimore", "state": "Maryland", "stateCode": "MD", "code": "BWI", "lat": 39.1774, "lon": -76.6684},
 ]
 
 # Airlines list
@@ -115,9 +115,9 @@ for day in days_of_week:
                     flight = {
                         "id": flight_id,
                         "date": day,
-                        "origin": origin["name"],
+                        "origin": {"name": origin["name"], "state": origin["state"], "stateCode": origin["stateCode"]},
                         "originCode": origin["code"],
-                        "destination": destination["name"],
+                        "destination": {"name": destination["name"], "state": destination["state"], "stateCode": destination["stateCode"]},
                         "destinationCode": destination["code"],
                         "airline": airline,
                         "departureTime": departure_time,
@@ -133,8 +133,10 @@ for day in days_of_week:
 
 # Create updated JSON structure
 flight_data_updated = {
-    "cities": [city["name"] for city in cities],
+    "cities": [{"name": city["name"], "state": city["state"], "stateCode": city["stateCode"]} for city in cities],
     "airlines": airlines,
+    "bookings": [],
+    "bookingCodes": [],
     "flights": flights_updated
 }
 

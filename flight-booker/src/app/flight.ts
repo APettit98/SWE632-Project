@@ -1,9 +1,11 @@
+import { City } from "./city";
+
 export interface Flight {
     id: string;
     date: string;
-    origin: string;
+    origin: City;
     originCode: string;
-    destination: string;
+    destination: City;
     destinationCode: string;
     airline: string;
     departureTime: string;

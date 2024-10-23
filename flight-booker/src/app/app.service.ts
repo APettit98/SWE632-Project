@@ -11,8 +11,8 @@ import * as flightData from "./flightData.json";
 export class AppService {
     // Used to share flight search parameters
     private search = new BehaviorSubject({
-        origin: "", 
-        destination: "", 
+        origin: {name: "", state: "", stateCode: ""} , 
+        destination:{name: "", state: "", stateCode: ""} , 
         departureDate: ""
     });
     
@@ -31,7 +31,21 @@ export class AppService {
     getBooking = this.booking.asObservable();
     getFlightData = this.flightData.asObservable();
 
-    constructor() {}
+    constructor() {
+        const originalData = this.flightData.getValue();
+        let sortedCities = originalData.cities.sort((a: any, b: any) => {
+            if (a.name.toLowerCase() < b.name.toLowerCase()) {
+                return -1;
+              } else if (a.name.toLowerCase() > b.name.toLowerCase()) {
+                return 1;
+              } else {
+                return 0;
+              }
+            });
+            
+        const updatedData = { ...originalData, cities: sortedCities };
+        this.flightData.next(updatedData);
+    }
 
     setSearch(search: FlightSearch) {
         this.search.next(search);
