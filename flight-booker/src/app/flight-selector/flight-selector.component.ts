@@ -65,7 +65,6 @@ export class FlightSelectorComponent {
   }
 
   initialFilter(): Flight[] {
-    console.log("Search: ", this.search);
     const dayOfWeek = new Date(this.search.departureDate + '/' + (new Date().toLocaleDateString('en-us', {year: "numeric"}))).toLocaleString('en-us', {weekday: 'long'});
     return this.flightData.flights.filter((flight: Flight) => {
       if (flight.origin.name !== this.search.origin.name) {
