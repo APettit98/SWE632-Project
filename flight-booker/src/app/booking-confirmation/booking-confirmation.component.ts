@@ -17,7 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class BookingConfirmationComponent {
   booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", bookingCode: "", fareClass: ""};
   flightData: any = {};
-  bookedFlight: Flight = {id: "", date: "", origin: "", originCode: "", destination: "", destinationCode: "", departureTime: "", arrivalTime: "", duration: 0, airline: "", economyPrice: 0, businessPrice: 0, firstPrice: 0};
+  bookedFlight: Flight = {id: "", date: "", origin: {"name": "", "state": "", "stateCode": ""}, originCode: "", destination: {"name": "", "state": "", "stateCode": ""}, destinationCode: "", departureTime: "", arrivalTime: "", duration: 0, airline: "", economyPrice: 0, businessPrice: 0, firstPrice: 0};
   farePaid: number = 0;
   convertTime = utils.convertTime;
   weekdayToDate = utils.weekdayToDate;
