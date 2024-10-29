@@ -25,7 +25,7 @@ export class ForgotBookingComponent {
   flightData: any = {}
   email: string = ''
   date: string = ''
-  bookingList: Booking [] = []
+  bookingList: any [] = []
   codesData: any = []
   b: Booking [] = []
   dates: String [] = [];
@@ -38,27 +38,18 @@ export class ForgotBookingComponent {
     this.appService.getFlightData.subscribe(d => this.flightData = d);
   }
 
-  emailIsValid(): boolean {
-    return this.bookingList.filter((booking: Booking) => this.email == booking.email).length != 0
-  }
-
-  showDate() {
-    this.dateVisible = true;
-    this.b = this.bookingList.filter((booking: Booking) => this.email == booking.email)
-    for (let i=0; i<this.b.length; i++) {
-      let fl = this.flightData.flights.find((f: Flight) => f.id === this.b[i].flightId);
-      this.codesData[i] = {code:this.b[i].bookingCode, flight:fl}
-    }
-  }
-
-  showCodes() {
+  searchBookings() {
     this.codesVisible = true;
-    this.codesData = this.codesData.filter((data: any) => new Date(this.date + '/' + (new Date().toLocaleDateString('en-us', {year: "numeric"}))).toLocaleString('en-us', {weekday: 'long'}) == data.flight.date)
+    this.codesData = this.bookingList.filter((data: any) => {
+      return this.email == data.booking.email && new Date(this.date + '/' + (new Date().toLocaleDateString('en-us', {year: "numeric"}))).toLocaleString('en-us', {weekday: 'long'}) === data.flight.date;
+    });
   }
+
   
   ngOnInit(): void {
     for (let b of this.flightData.bookings) {
-      this.bookingList.push(b);
+      const flight = this.flightData.flights.find((f: Flight) => f.id === b.flightId);
+      this.bookingList.push({booking: b, flight: flight});
     }
     let date = new Date();
     for (let i=0; i<7; i++) {
