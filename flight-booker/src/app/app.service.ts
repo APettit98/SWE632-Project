@@ -3,6 +3,13 @@ import { BehaviorSubject } from "rxjs";
 import { FlightSearch } from "./flightSearch";
 import { Booking } from "./booking";
 import * as flightData from "./flightData.json";
+import { Filter } from "./filter";
+
+enum SortOptions {
+    Price = "price",
+    Duration = "duration",
+    DepartureTime = "departureTime"
+};
 
 
 @Injectable({
@@ -26,10 +33,23 @@ export class AppService {
         fareClass: ""
     });
     private flightData = new BehaviorSubject(flightData);
+
+    private filter = new BehaviorSubject({
+        filterEconomy: true,
+        filterBusiness: true,
+        filterFirst: true,
+        maxPrice: 2000,
+        selectedAirlines: ["American", "Delta", "United"]
+    });
+
+    private sortOption = new BehaviorSubject<SortOptions>(SortOptions.Price);
+
     
     getSearch = this.search.asObservable();
     getBooking = this.booking.asObservable();
     getFlightData = this.flightData.asObservable();
+    getFilter = this.filter.asObservable();
+    getSortOption = this.sortOption.asObservable();
 
     constructor() {
         const originalData = this.flightData.getValue();
@@ -57,5 +77,13 @@ export class AppService {
 
     setFlightData(data: any) {
         this.flightData.next(data);
+    }
+
+    setFilter(filter: Filter) {
+        this.filter.next(filter);
+    }
+
+    setSortOption(option: SortOptions) {
+        this.sortOption.next(option);
     }
 }
