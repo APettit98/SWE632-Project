@@ -37,8 +37,8 @@ export class FlightSelectorComponent {
   maxPrice: number = 0;
   selectedMaxPrice: number = 0;
   priceSliderChanged = false;
-  chosenAirlines = new FormControl([]);
-  sortOption = new FormControl('');
+  filter: any = {};
+  sortOption: any = {};
   readonly filterEconomy = model(true);
   readonly filterBusiness = model(true);
   readonly filterFirst = model(true);
@@ -49,6 +49,8 @@ export class FlightSelectorComponent {
     this.appService.getSearch.subscribe(s => this.search = s);
     this.appService.getBooking.subscribe(b => this.booking = b);
     this.appService.getFlightData.subscribe(d => this.flightData = d);
+    this.appService.getFilter.subscribe(f => this.filter = f);
+    this.appService.getSortOption.subscribe(s => this.sortOption = s);
   }
 
 
@@ -98,6 +100,8 @@ export class FlightSelectorComponent {
     const priceRange = this.getPriceRange();
     this.maxPrice = priceRange[1];
     this.selectedMaxPrice = this.maxPrice;
+    this.filterByAirline();
+    this.sortFlights();
   }
 
   onFareClassFilterChange(): void {
@@ -109,11 +113,7 @@ export class FlightSelectorComponent {
   }
 
   filterByAirline() {
-    const selectedAirlines: string[] = this.chosenAirlines.value ? this.chosenAirlines.value : [];
-    if (selectedAirlines.length === 0) {
-      this.availableFlights = this.initialFilter();
-      return;
-    }
+    const selectedAirlines: string[] = this.filter.selectedAirlines ? this.filter.selectedAirlines : [];
 
     this.availableFlights = this.initialFilter().filter((flight) => {
       if (selectedAirlines?.includes(flight.airline)) {
@@ -128,6 +128,7 @@ export class FlightSelectorComponent {
     if (this.selectedMaxPrice > this.maxPrice || !this.priceSliderChanged) {
       this.selectedMaxPrice = this.maxPrice;
     }
+    this.sortFlights();
   }
 
   filterByPrice() {
@@ -162,7 +163,7 @@ export class FlightSelectorComponent {
     this.loading = true;
     setTimeout(() => 
       {
-        switch (this.sortOption.value) {
+        switch (this.sortOption) {
           case "price": 
             this.availableFlights.sort(this.sortByPrice);
             this.loading = false;

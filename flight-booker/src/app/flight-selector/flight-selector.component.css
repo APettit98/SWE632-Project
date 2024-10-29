@@ -16,14 +16,6 @@
 
 .filter-and-sort {
     margin: 1rem;
-}
-
-.filter {
-    flex: 1;
-}
-
-.filters {
-    display: flex;
     justify-content: space-between;
 }
 
@@ -34,11 +26,6 @@
 
 .price-slider {
     margin-top: 0px;
-}
-
-.filter-card {
-    width: 75%;
-    height: 100%;
 }
 
 .loading-spinner {

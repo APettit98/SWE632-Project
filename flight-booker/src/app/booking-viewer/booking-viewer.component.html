@@ -10,4 +10,5 @@
         <input [(ngModel)]="code" matInput>
     </mat-form-field>
 </div>
-<button mat-flat-button [disabled]="isValid()" (click)="selectBooking()" [routerLink]="['/details']">View Booking Details</button>
+<div><button mat-flat-button [disabled]="isValid()" (click)="selectBooking()" [routerLink]="['/details']">View Booking Details</button></div>
+<a [routerLink]="['/forgot']" class="forgotLink">Forgot booking code?</a>

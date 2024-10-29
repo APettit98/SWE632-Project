@@ -7,6 +7,7 @@ import { BookingViewerComponent } from './booking-viewer/booking-viewer.componen
 import { BookingDetailsComponent } from './booking-details/booking-details.component';
 import { BookingCancelComponent } from './booking-cancel/booking-cancel.component';
 import { CancelConfirmationComponent } from './cancel-confirmation/cancel-confirmation.component';
+import { ForgotBookingComponent } from './forgot-booking/forgot-booking.component';
 
 export const routes: Routes = [
     {
@@ -40,5 +41,9 @@ export const routes: Routes = [
     {
         path: 'cancelConfirm',
         component: CancelConfirmationComponent
+    },
+    {
+        path: 'forgot',
+        component: ForgotBookingComponent
     }
 ];
