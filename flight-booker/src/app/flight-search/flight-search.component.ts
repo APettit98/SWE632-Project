@@ -26,8 +26,9 @@ export class FlightSearchComponent {
   dates: String [] = [];
   filter: any = {filterEconomy: true, filterBusiness: true, filterFirst: true, maxPrice: 2000, selectedAirlines: []};
   sortOption: any = {};
-  originFormControl = new FormControl('', Validators.required);
-  destinationFormControl = new FormControl('', Validators.required);
+  emptyCity = {name: "", state: "", stateCode: ""}
+  originFormControl = new FormControl(this.emptyCity, Validators.required);
+  destinationFormControl = new FormControl(this.emptyCity, Validators.required);
   dateFormControl = new FormControl('', Validators.required);
 
   search: FlightSearch = {origin: {name: "", state: "", stateCode: ""} , destination: {name: "", state: "", stateCode: ""} , departureDate: ""};

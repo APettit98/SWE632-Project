@@ -1,12 +1,12 @@
 <h3>Welcome Version 3</h3>
 
 <p>Flight Browser</p>
-<mat-grid-list cols="8" rowHeight="5rem">
+<mat-grid-list cols="5" rowHeight="5rem" class="searchForm">
     <mat-grid-tile>
         <mat-form-field>
             <mat-label>Origin</mat-label>
             <select [(ngModel)]="search.origin" matNativeControl required [formControl]="originFormControl">
-                <option label="---"></option>
+                <option label="---" [value]="this.emptyCity"></option>
                 <option *ngFor="let city of flightData.cities" [ngValue]="city">{{ city.name }}, {{ city.stateCode }}</option>
             </select>
             @if (originFormControl.hasError('required')) {
@@ -18,7 +18,7 @@
         <mat-form-field>
             <mat-label>Destination</mat-label>
             <select [(ngModel)]="search.destination" matNativeControl required [formControl]="destinationFormControl">
-                <option label="---"></option>
+                <option label="---" [value]="this.emptyCity"></option>
                 <option *ngFor="let city of flightData.cities" [ngValue]="city">{{ city.name }}, {{ city.stateCode }}</option>
             </select>
             @if (destinationFormControl.hasError('required')) {
@@ -40,7 +40,7 @@
     </mat-grid-tile>
     <mat-grid-tile>
         <div class="filter">
-            <mat-form-field>
+            <mat-form-field class="airlineForm">
                 <mat-label>Filter by Airline</mat-label>
                 <mat-select [(ngModel)]="this.filter.selectedAirlines" (selectionChange)="onSelect()" multiple>
                     <mat-select-trigger>
