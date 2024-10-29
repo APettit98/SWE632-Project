@@ -2,29 +2,26 @@
 <p>Enter your email:</p>
 <div class="EmailForm">
     <mat-form-field>
-        <input [(ngModel)]="email" matInput (keyup.enter)="showDate()">
+        <input [(ngModel)]="email" matInput>
     </mat-form-field>
 </div>
-<div *ngIf="dateVisible">
-    @if (emailIsValid()) {
-        <p>Enter flight departure date:</p>
-        <mat-form-field>
-            <select [(ngModel)]="date" (change)="showCodes()" matNativeControl>
-                <option label="---"></option>
-                <option *ngFor="let date of dates">{{ date }}</option>
-            </select>
-        </mat-form-field>
-    }
-    @else {
-        <p>No reservations found.</p>
-    }
+<div>
+    <p>Enter flight departure date:</p>
+    <mat-form-field>
+        <select [(ngModel)]="date" matNativeControl>
+            <option label="---"></option>
+            <option *ngFor="let date of dates">{{ date }}</option>
+        </select>
+    </mat-form-field>
 </div>
+<button mat-stroked-button (click)="searchBookings()">Search</button>
+
 <div *ngIf="codesVisible">
-    <p><b>Flights matching date {{date}}</b></p>
+    <p><b>Matching flights</b></p>
     <p *ngFor="let data of codesData">
         {{data.flight.originCode}}
         <mat-icon aria-hidden="false" fontIcon="trending_flat"></mat-icon>
-        {{data.flight.destinationCode}}, {{convertTime(data.flight.departureTime)}}     <b>{{data.code}}</b>
+        {{data.flight.destinationCode}}, {{date}} {{convertTime(data.flight.departureTime)}}     <b>{{data.booking.bookingCode}}</b>
     </p>
     @if (codesData.length == 0) {
         <p>No reservations found.</p>
