@@ -12,6 +12,19 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatGridListModule } from '@angular/material/grid-list';
 
+function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const toRadians = (degrees: number) => degrees * (Math.PI / 180);
+  const R = 6371; // Radius of the Earth in kilometers
+  const dLat = toRadians(lat2 - lat1);
+  const dLon = toRadians(lon2 - lon1);
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c; // Distance in kilometers
+}
+
+
 @Component({
   selector: 'app-flight-search',
   standalone: true,
@@ -56,6 +69,12 @@ export class FlightSearchComponent {
       date.setDate(date.getDate() + 1);
     }
     
+    this.getClosestCity(this.flightData.cities).then((closestCity) => {
+      if (closestCity) {
+        this.originFormControl.setValue(closestCity);
+      }
+    });
+
   }
 
   updateSearch() {
@@ -64,4 +83,29 @@ export class FlightSearchComponent {
    this.appService.setSortOption(this.sortOption);
   }
 
+  getClosestCity(cities: { name: string, state: string, stateCode: string, code: string, lat: number, lon: number }[]) {
+    return new Promise<{ name: string, state: string, stateCode: string, code: string, lat: number, lon: number } | null>((resolve, reject) => {
+      if (!navigator.geolocation) {
+        reject('Geolocation is not supported by this browser.');
+      } else {
+        navigator.geolocation.getCurrentPosition(position => {
+          const { latitude, longitude } = position.coords;
+          let closestCity = null;
+          let minDistance = Infinity;
+  
+          for (const city of cities) {
+            const distance = calculateDistance(latitude, longitude, city.lat, city.lon);
+            if (distance < minDistance) {
+              minDistance = distance;
+              closestCity = city;
+            }
+          }
+  
+          resolve(closestCity);
+        }, error => {
+          reject('Unable to retrieve your location.');
+        });
+      }
+    });
+  }
 }
