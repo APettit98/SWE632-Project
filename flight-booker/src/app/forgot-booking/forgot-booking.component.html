@@ -8,10 +8,11 @@
 <div>
     <p>Enter flight departure date:</p>
     <mat-form-field>
-        <select [(ngModel)]="date" matNativeControl>
-            <option label="---"></option>
-            <option *ngFor="let date of dates">{{ date }}</option>
-        </select>
+        <input matInput [min]="minDate" [matDatepicker]="datepicker" [(ngModel)]="date" required>
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+            </mat-datepicker>
     </mat-form-field>
 </div>
 <button mat-stroked-button (click)="searchBookings()">Search</button>
@@ -21,7 +22,7 @@
     <p *ngFor="let data of codesData">
         {{data.flight.originCode}}
         <mat-icon aria-hidden="false" fontIcon="trending_flat"></mat-icon>
-        {{data.flight.destinationCode}}, {{date}} {{convertTime(data.flight.departureTime)}}     <b>{{data.booking.bookingCode}}</b>
+        {{data.flight.destinationCode}}, {{dateToString(date)}} {{convertTime(data.flight.departureTime)}}     <b>{{data.booking.bookingCode}}</b>
     </p>
     @if (codesData.length == 0) {
         <p>No reservations found.</p>

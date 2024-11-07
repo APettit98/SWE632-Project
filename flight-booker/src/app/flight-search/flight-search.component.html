@@ -1,4 +1,4 @@
-<h3>Welcome Version 3</h3>
+<h3>Welcome Version 4</h3>
 
 <p>Flight Browser</p>
 <mat-grid-list cols="5" rowHeight="5rem" class="searchForm">
@@ -29,10 +29,11 @@
     <mat-grid-tile>
         <mat-form-field>
             <mat-label>Date</mat-label>
-            <select [(ngModel)]="search.departureDate" matNativeControl required [formControl]="dateFormControl">
-                <option label="---"></option>
-                <option *ngFor="let date of dates">{{ date }}</option>
-            </select>
+            <input matInput [min]="minDate" [matDatepicker]="datepicker" [(ngModel)]="date" required [formControl]="dateFormControl">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+            </mat-datepicker>
             @if (dateFormControl.hasError('required')) {
                 <mat-error>This field is required</mat-error>
             }

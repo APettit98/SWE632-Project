@@ -28,8 +28,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class FlightSelectorComponent {
 
-  search: FlightSearch = {origin: {"name": "", "state": "", "stateCode": ""}, destination: {"name": "", "state": "", "stateCode": ""}, departureDate: ""};
-  booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", bookingCode: "", fareClass: ""};
+  search: FlightSearch = {origin: {"name": "", "state": "", "stateCode": "", lat: 0, lon: 0}, destination: {"name": "", "state": "", "stateCode": "", lat: 0, lon: 0}, departureDate: new Date()};
+  booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", date: new Date(), bookingCode: "", fareClass: ""};
   flightData: any = {};
   loading = false;
   availableFlights: Flight[] = [];
@@ -60,6 +60,7 @@ export class FlightSelectorComponent {
       flightId: id, 
       firstName: "", 
       lastName: "", 
+      date: this.search.departureDate,
       email: "", 
       bookingCode: "", 
       fareClass: fareClass
