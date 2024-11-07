@@ -88,11 +88,10 @@ export class FlightSearchComponent {
   }
 
   updateSearch() {
-    console.log("Search: ", this.search);
     this.search.departureDate = this.date;
-   this.appService.setSearch(this.search);
-   this.appService.setFilter(this.filter);
-   this.appService.setSortOption(this.sortOption);
+    this.appService.setSearch(this.search);
+    this.appService.setFilter(this.filter);
+    this.appService.setSortOption(this.sortOption);
   }
 
   getClosestCity(cities: { name: string, state: string, stateCode: string, code: string, lat: number, lon: number }[]) {
