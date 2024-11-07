@@ -15,12 +15,12 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './booking-confirmation.component.css'
 })
 export class BookingConfirmationComponent {
-  booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", bookingCode: "", fareClass: ""};
+  booking: Booking = {flightId: "", firstName: "", lastName: "", date: new Date(), email: "", bookingCode: "", fareClass: ""};
   flightData: any = {};
-  bookedFlight: Flight = {id: "", date: "", origin: {"name": "", "state": "", "stateCode": ""}, originCode: "", destination: {"name": "", "state": "", "stateCode": ""}, destinationCode: "", departureTime: "", arrivalTime: "", duration: 0, airline: "", economyPrice: 0, businessPrice: 0, firstPrice: 0};
+  bookedFlight: Flight = {id: "", date: "", origin: {"name": "", "state": "", "stateCode": "", lat: 0, lon: 0}, originCode: "", destination: {"name": "", "state": "", "stateCode": "", lat: 0, lon: 0}, destinationCode: "", departureTime: "", arrivalTime: "", duration: 0, airline: "", economyPrice: 0, businessPrice: 0, firstPrice: 0};
   farePaid: number = 0;
+  dateString: string = "";
   convertTime = utils.convertTime;
-  weekdayToDate = utils.weekdayToDate;
 
   constructor(private appService: AppService) {
     this.appService.getBooking.subscribe(b => this.booking = b);
@@ -42,10 +42,11 @@ export class BookingConfirmationComponent {
       default:
         this.farePaid = 0;
     }
+    this.dateString = this.booking.date.toLocaleDateString('en-us', {month: 'short', day: 'numeric', year: 'numeric'});
   }
 
   ngOnDestroy(): void {
-    this.appService.setBooking({flightId: "", firstName: "", lastName: "", email: "", bookingCode: "", fareClass: ""});
+    this.appService.setBooking({flightId: "", firstName: "", lastName: "", email: "", date: new Date(), bookingCode: "", fareClass: ""});
   }
 
 }

@@ -18,12 +18,12 @@ import { MatCardActions } from '@angular/material/card';
   styleUrl: './booking-details.component.css'
 })
 export class BookingDetailsComponent {
-  booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", bookingCode: "", fareClass: ""};
+  booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", date: new Date(), bookingCode: "", fareClass: ""};
   flightData: any = {}
-  bookedFlight: Flight = {id: "", date: "", origin: {"name": "", "state": "", "stateCode": ""}, originCode: "", destination: {"name": "", "state": "", "stateCode": ""}, destinationCode: "", departureTime: "", arrivalTime: "", duration: 0, airline: "", economyPrice: 0, businessPrice: 0, firstPrice: 0};
+  bookedFlight: Flight = {id: "", date: "", origin: {"name": "", "state": "", "stateCode": "", lat: 0, lon: 0}, originCode: "", destination: {"name": "", "state": "", "stateCode": "", lat: 0, lon: 0}, destinationCode: "", departureTime: "", arrivalTime: "", duration: 0, airline: "", economyPrice: 0, businessPrice: 0, firstPrice: 0};
   farePaid: number = 0
+  dateString: string = ""
   convertTime = utils.convertTime
-  weekdayToDate = utils.weekdayToDate
 
   constructor(private appService:AppService) {
     this.appService.getBooking.subscribe(b => this.booking = b);
@@ -45,6 +45,7 @@ export class BookingDetailsComponent {
       default:
         this.farePaid = 0;
     }
+    this.dateString = this.booking.date.toLocaleDateString('en-us', {month: 'short', day: 'numeric', year: 'numeric'});
   }
 
 }
