@@ -80,7 +80,9 @@ export class FlightSearchComponent {
     
     this.getClosestCity(this.flightData.cities).then((closestCity) => {
       if (closestCity) {
-        this.originFormControl.setValue(closestCity);
+        if (this.originFormControl.value === this.emptyCity) {
+          this.originFormControl.setValue(closestCity);
+        }
       }
     });
   }
