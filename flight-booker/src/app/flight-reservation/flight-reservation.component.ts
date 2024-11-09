@@ -17,7 +17,7 @@ import { RouterLink } from '@angular/router';
 })
 export class FlightReservationComponent {
 
-  booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", bookingCode: "", fareClass: ""};
+  booking: Booking = {flightId: "", firstName: "", lastName: "", date: new Date(), email: "", bookingCode: "", fareClass: ""};
   flightData: any = {};
   readonly firstName = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z -\']*')]);
   readonly lastName = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z -\']*')]);
@@ -48,6 +48,7 @@ export class FlightReservationComponent {
       flightId: this.booking.flightId,
       firstName: this.firstName.value !== null ? this.firstName.value : "",
       lastName: this.lastName.value !== null ? this.lastName.value : "",
+      date: this.booking.date,
       email: this.email.value !== null ? this.email.value : "",
       bookingCode: this.generateBookingCode(),
       fareClass: this.booking.fareClass

@@ -12,37 +12,44 @@ import { MatSelect } from '@angular/material/select';
 import { MatOption } from '@angular/material/select';
 import { FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as utils from '../utils'
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-forgot-booking',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, RouterLink, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatIcon, MatSelect, MatOption],
+  providers: [provideNativeDateAdapter()],
+  imports: [CommonModule, MatButtonModule, RouterLink, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatIcon, MatSelect, MatOption, MatInputModule, MatDatepickerModule],
   templateUrl: './forgot-booking.component.html',
   styleUrl: './forgot-booking.component.css'
 })
 export class ForgotBookingComponent {
-  booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", bookingCode: "", fareClass: ""};
   flightData: any = {}
   email: string = ''
-  date: string = ''
+  date: Date;
   bookingList: any [] = []
   codesData: any = []
   b: Booking [] = []
-  dates: String [] = [];
+  minDate: Date = new Date();
   dateVisible = false;
   codesVisible = false;
   convertTime = utils.convertTime
+  dateToDayOfWeek = utils.dateToDayOfWeek
 
   constructor(private appService:AppService) {
-    this.appService.getBooking.subscribe(b => this.booking = b);
     this.appService.getFlightData.subscribe(d => this.flightData = d);
+    this.appService.getMindate.subscribe(d => this.minDate = d);
   }
 
   searchBookings() {
     this.codesVisible = true;
     this.codesData = this.bookingList.filter((data: any) => {
-      return this.email == data.booking.email && new Date(this.date + '/' + (new Date().toLocaleDateString('en-us', {year: "numeric"}))).toLocaleString('en-us', {weekday: 'long'}) === data.flight.date;
+      return this.email == data.booking.email && this.dateToDayOfWeek(this.date) === data.flight.date;
     });
+  }
+
+  dateToString(date: Date) {
+    return date.toLocaleDateString('en-us', {month: 'short', day: 'numeric', year: 'numeric'});
   }
 
   
@@ -50,11 +57,6 @@ export class ForgotBookingComponent {
     for (let b of this.flightData.bookings) {
       const flight = this.flightData.flights.find((f: Flight) => f.id === b.flightId);
       this.bookingList.push({booking: b, flight: flight});
-    }
-    let date = new Date();
-    for (let i=0; i<7; i++) {
-      this.dates.push(date.toLocaleString("en-US", {month: "numeric", day: "numeric"}));
-      date.setDate(date.getDate() + 1);
     }
   }
 }

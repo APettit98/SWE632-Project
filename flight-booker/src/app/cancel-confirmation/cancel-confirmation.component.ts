@@ -10,7 +10,7 @@ import { Booking } from '../booking';
   styleUrl: './cancel-confirmation.component.css'
 })
 export class CancelConfirmationComponent {
-  booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", bookingCode: "", fareClass: ""};
+  booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", date: new Date(), bookingCode: "", fareClass: ""};
   flightData: any = {};
 
   constructor(private appService: AppService) {

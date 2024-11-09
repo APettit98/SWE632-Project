@@ -18,9 +18,9 @@ enum SortOptions {
 export class AppService {
     // Used to share flight search parameters
     private search = new BehaviorSubject({
-        origin: {name: "", state: "", stateCode: ""} , 
-        destination:{name: "", state: "", stateCode: ""} , 
-        departureDate: ""
+        origin: {name: "", state: "", stateCode: "", lat: 0, lon: 0} , 
+        destination:{name: "", state: "", stateCode: "", lat: 0, lon: 0} , 
+        departureDate: new Date()
     });
     
     // Used to share selected flight id
@@ -28,6 +28,7 @@ export class AppService {
         flightId: "",
         firstName: "",
         lastName: "",
+        date: new Date(),
         email: "",
         bookingCode: "",
         fareClass: ""
@@ -44,12 +45,15 @@ export class AppService {
 
     private sortOption = new BehaviorSubject<SortOptions>(SortOptions.Price);
 
+    private minDate = new BehaviorSubject(new Date());
+
     
     getSearch = this.search.asObservable();
     getBooking = this.booking.asObservable();
     getFlightData = this.flightData.asObservable();
     getFilter = this.filter.asObservable();
     getSortOption = this.sortOption.asObservable();
+    getMindate = this.minDate.asObservable();
 
     constructor() {
         const originalData = this.flightData.getValue();

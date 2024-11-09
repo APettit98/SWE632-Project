@@ -133,7 +133,7 @@ for day in days_of_week:
 
 # Create updated JSON structure
 flight_data_updated = {
-    "cities": [{"name": city["name"], "state": city["state"], "stateCode": city["stateCode"]} for city in cities],
+    "cities": [city for city in cities],
     "airlines": airlines,
     "bookings": [],
     "bookingCodes": [],

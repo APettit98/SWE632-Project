@@ -16,7 +16,7 @@ import { FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angu
   styleUrl: './booking-viewer.component.css'
 })
 export class BookingViewerComponent {
-  booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", bookingCode: "", fareClass: ""};
+  booking: Booking = {flightId: "", firstName: "", lastName: "", email: "", date: new Date(), bookingCode: "", fareClass: ""};
   flightData: any = {}
   name: string = ''
   code: string = ''
