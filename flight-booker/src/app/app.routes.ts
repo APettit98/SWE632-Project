@@ -8,11 +8,12 @@ import { BookingDetailsComponent } from './booking-details/booking-details.compo
 import { BookingCancelComponent } from './booking-cancel/booking-cancel.component';
 import { CancelConfirmationComponent } from './cancel-confirmation/cancel-confirmation.component';
 import { ForgotBookingComponent } from './forgot-booking/forgot-booking.component';
+import { StepperComponent } from './stepper/stepper.component';
 
 export const routes: Routes = [
     {
         path: '',
-        component: FlightSearchComponent
+        component: StepperComponent
     },
     {
         path: 'select',
