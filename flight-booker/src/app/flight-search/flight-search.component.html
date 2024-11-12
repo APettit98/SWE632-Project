@@ -1,15 +1,12 @@
-<h3>Welcome Version 4</h3>
-
-<p>Flight Browser</p>
 <mat-grid-list cols="5" rowHeight="5rem" class="searchForm">
     <mat-grid-tile>
         <mat-form-field>
             <mat-label>Origin</mat-label>
-            <select [(ngModel)]="search.origin" matNativeControl required [formControl]="originFormControl">
+            <select [(ngModel)]="search.origin" matNativeControl required [formControl]="originFormControl" [errorStateMatcher]="errorStateMatcher">
                 <option label="---" [value]="this.emptyCity"></option>
                 <option *ngFor="let city of flightData.cities" [ngValue]="city">{{ city.name }}, {{ city.stateCode }}</option>
             </select>
-            @if (originFormControl.hasError('required')) {
+            @if (originFormControl.hasError('required') && (originFormControl.dirty || originFormControl.touched)) {
                 <mat-error>This field is required</mat-error>
             }
         </mat-form-field>
@@ -17,11 +14,11 @@
     <mat-grid-tile>
         <mat-form-field>
             <mat-label>Destination</mat-label>
-            <select [(ngModel)]="search.destination" matNativeControl required [formControl]="destinationFormControl">
+            <select [(ngModel)]="search.destination" matNativeControl required [formControl]="destinationFormControl" [errorStateMatcher]="errorStateMatcher">
                 <option label="---" [value]="this.emptyCity"></option>
                 <option *ngFor="let city of flightData.cities" [ngValue]="city">{{ city.name }}, {{ city.stateCode }}</option>
             </select>
-            @if (destinationFormControl.hasError('required')) {
+            @if (destinationFormControl.hasError('required') && (destinationFormControl.dirty || destinationFormControl.touched)) {
                 <mat-error>This field is required</mat-error>
             }
         </mat-form-field>
@@ -29,12 +26,12 @@
     <mat-grid-tile>
         <mat-form-field>
             <mat-label>Date</mat-label>
-            <input matInput [min]="minDate" [matDatepicker]="datepicker" [(ngModel)]="date" required [formControl]="dateFormControl">
+            <input matInput [min]="minDate" [matDatepicker]="datepicker" [(ngModel)]="date" required [formControl]="dateFormControl" [errorStateMatcher]="errorStateMatcher">
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
             <mat-datepicker #datepicker>
             </mat-datepicker>
-            @if (dateFormControl.hasError('required')) {
+            @if (dateFormControl.hasError('required') && (dateFormControl.dirty || dateFormControl.touched)) {
                 <mat-error>This field is required</mat-error>
             }
         </mat-form-field>
@@ -69,7 +66,3 @@
     </mat-grid-tile>
     
 </mat-grid-list>
-
-<div class="searchButton">
-    <button mat-flat-button (click)="updateSearch()" [routerLink]="['/select']" [disabled]="originFormControl.hasError('required') || destinationFormControl.hasError('required') || dateFormControl.hasError('required')">View Flights</button>
-</div>

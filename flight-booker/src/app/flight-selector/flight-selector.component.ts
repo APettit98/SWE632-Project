@@ -1,4 +1,4 @@
-import {  Component, model } from '@angular/core';
+import {  Component, EventEmitter, model, Output } from '@angular/core';
 import { AppService } from '../app.service';
 import { FlightSearch } from "../flightSearch";
 import { Flight } from '../flight';
@@ -34,23 +34,31 @@ export class FlightSelectorComponent {
   loading = false;
   availableFlights: Flight[] = [];
   availableAirlines: string[] = [];
-  maxPrice: number = 0;
+  maxPrice: number = 2000;
   selectedMaxPrice: number = 0;
   priceSliderChanged = false;
   filter: any = {};
   sortOption: any = {};
+  searchDateString: string = "";
   readonly filterEconomy = model(true);
   readonly filterBusiness = model(true);
   readonly filterFirst = model(true);
   convertTime = utils.convertTime;
   convertDuration = utils.convertDuration;
 
+  @Output() flightSelected = new EventEmitter<boolean>();
+
   constructor(private appService:AppService) {
+    this.getData();
+  }
+
+  getData() {
     this.appService.getSearch.subscribe(s => this.search = s);
     this.appService.getBooking.subscribe(b => this.booking = b);
     this.appService.getFlightData.subscribe(d => this.flightData = d);
     this.appService.getFilter.subscribe(f => this.filter = f);
     this.appService.getSortOption.subscribe(s => this.sortOption = s);
+    this.searchDateString = this.search.departureDate.toLocaleDateString('en-us', {month: 'short', day: 'numeric', year: 'numeric'});
   }
 
 
@@ -65,6 +73,7 @@ export class FlightSelectorComponent {
       bookingCode: "", 
       fareClass: fareClass
     });
+    this.flightSelected.emit(true);
   }
 
   initialFilter(): Flight[] {
@@ -87,15 +96,21 @@ export class FlightSelectorComponent {
 
   getPriceRange(): number[] {
     const prices: number[] = [];
-    this.availableFlights.forEach(flight => {
-      if (this.filterEconomy()) prices.push(flight.economyPrice);
-      if (this.filterBusiness()) prices.push(flight.businessPrice);
-      if (this.filterFirst()) prices.push(flight.firstPrice);
-    });
-    return [Math.min(...prices), Math.max(...prices)];
+    if (this.availableFlights.length) {
+      this.availableFlights.forEach(flight => {
+        if (this.filterEconomy()) prices.push(flight.economyPrice);
+        if (this.filterBusiness()) prices.push(flight.businessPrice);
+        if (this.filterFirst()) prices.push(flight.firstPrice);
+      });
+      return [Math.min(...prices), Math.max(...prices)];
+    } else {
+      return [0, 2000];
+    }
+    
   }
 
   ngOnInit(): void {
+    this.getData();
     this.availableFlights = this.initialFilter();
     this.availableAirlines = this.availableFlights.map(flight => flight.airline);
     const priceRange = this.getPriceRange();

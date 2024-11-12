@@ -1,12 +1,7 @@
 .reservation-details {
     width: 25%;
-    margin: 0 auto;
-    align-items: center;
-    justify-content: center;
-}
-
-.mat-mdc-card {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-self: flex-start;
+    padding-bottom: 1rem;
 }

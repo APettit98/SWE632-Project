@@ -47,6 +47,8 @@ export class AppService {
 
     private minDate = new BehaviorSubject(new Date());
 
+    private resetStepper = new BehaviorSubject<boolean>(false);
+
     
     getSearch = this.search.asObservable();
     getBooking = this.booking.asObservable();
@@ -54,6 +56,7 @@ export class AppService {
     getFilter = this.filter.asObservable();
     getSortOption = this.sortOption.asObservable();
     getMindate = this.minDate.asObservable();
+    getResetStepper = this.resetStepper.asObservable();
 
     constructor() {
         const originalData = this.flightData.getValue();
@@ -89,5 +92,9 @@ export class AppService {
 
     setSortOption(option: SortOptions) {
         this.sortOption.next(option);
+    }
+
+    setResetStepper(reset: boolean) {     
+        this.resetStepper.next(reset);
     }
 }

@@ -1,4 +1,4 @@
-<h3>Available Flights</h3>
+<p>Viewing flights from {{this.search.origin.name}}, {{this.search.origin.stateCode}} to {{this.search.destination.name}}, {{this.search.destination.stateCode}} on {{this.searchDateString}}</p>
 <div class="filter-and-sort">
     <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
@@ -58,71 +58,72 @@
 <mat-spinner *ngIf="this.loading" [diameter]="50" class="loading-spinner"></mat-spinner>
 <div class="flight-selection">
     <mat-accordion multi>
-        <mat-expansion-panel *ngFor="let flight of availableFlights">
-            <mat-expansion-panel-header>
-                <mat-panel-title>{{convertTime(flight.departureTime)}} - {{convertTime(flight.arrivalTime)}}</mat-panel-title>
-                <mat-panel-description>{{convertDuration(flight.duration)}}</mat-panel-description>
-                <mat-panel-description>
-                    {{flight.originCode}} 
-                    <mat-icon aria-hidden="false" fontIcon="trending_flat"></mat-icon>
-                    {{flight.destinationCode}}
-                </mat-panel-description>
-                <mat-panel-description>{{flight.airline}}</mat-panel-description>
-                <mat-panel-description>${{getDisplayPrice(flight)}}</mat-panel-description>
-            </mat-expansion-panel-header>
-            <mat-grid-list cols="3" rowHeight="15rem">
-                <mat-grid-tile>
-                    <mat-card appearance="outlined">
-                        <mat-card-header>
-                            <mat-card-title>Economy Class</mat-card-title>
-                            <mat-card-subtitle>${{flight.economyPrice}}</mat-card-subtitle>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <div>Depart: {{convertTime(flight.departureTime)}}</div>
-                            <div>Arrive: {{convertTime(flight.arrivalTime)}}</div>
-                            <div>Duration: {{convertDuration(flight.duration)}}</div>
-                        </mat-card-content>
-                        <mat-card-actions>
-                            <button mat-stroked-button (click)="selectFlight(flight.id, 'Economy')" [routerLink]="['/reserve']">Select</button>
-                        </mat-card-actions>
-                    </mat-card>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                    <mat-card appearance="outlined">
-                        <mat-card-header>
-                            <mat-card-title>Business Class</mat-card-title>
-                            <mat-card-subtitle>${{flight.businessPrice}}</mat-card-subtitle>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <div>Depart: {{convertTime(flight.departureTime)}}</div>
-                            <div>Arrive: {{convertTime(flight.arrivalTime)}}</div>
-                            <div>Duration: {{convertDuration(flight.duration)}}</div>
-                        </mat-card-content>
-                        <mat-card-actions>
-                            <button mat-stroked-button (click)="selectFlight(flight.id, 'Business')" [routerLink]="['/reserve']">Select</button>
-                        </mat-card-actions>
-                    </mat-card>
-                </mat-grid-tile>
-                <mat-grid-tile>
-                    <mat-card appearance="outlined">
-                        <mat-card-header>
-                            <mat-card-title>First Class</mat-card-title>
-                            <mat-card-subtitle>${{flight.firstPrice}}</mat-card-subtitle>
-                        </mat-card-header>
-                        <mat-card-content>
-                            <div>Depart: {{convertTime(flight.departureTime)}}</div>
-                            <div>Arrive: {{convertTime(flight.arrivalTime)}}</div>
-                            <div>Duration: {{convertDuration(flight.duration)}}</div>
-                        </mat-card-content>
-                        <mat-card-actions>
-                            <button mat-stroked-button (click)="selectFlight(flight.id, 'First')" [routerLink]="['/reserve']">Select</button>
-                        </mat-card-actions>
-                    </mat-card>
-                </mat-grid-tile>
-            </mat-grid-list>
-        </mat-expansion-panel>
+        @for (flight of availableFlights; track flight.id) {
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>{{convertTime(flight.departureTime)}} - {{convertTime(flight.arrivalTime)}}</mat-panel-title>
+                    <mat-panel-description>{{convertDuration(flight.duration)}}</mat-panel-description>
+                    <mat-panel-description>
+                        {{flight.originCode}} 
+                        <mat-icon aria-hidden="false" fontIcon="trending_flat"></mat-icon>
+                        {{flight.destinationCode}}
+                    </mat-panel-description>
+                    <mat-panel-description>{{flight.airline}}</mat-panel-description>
+                    <mat-panel-description>${{getDisplayPrice(flight)}}</mat-panel-description>
+                </mat-expansion-panel-header>
+                <mat-grid-list cols="3" rowHeight="15rem">
+                    <mat-grid-tile>
+                        <mat-card appearance="outlined">
+                            <mat-card-header>
+                                <mat-card-title>Economy Class</mat-card-title>
+                                <mat-card-subtitle>${{flight.economyPrice}}</mat-card-subtitle>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <div>Depart: {{convertTime(flight.departureTime)}}</div>
+                                <div>Arrive: {{convertTime(flight.arrivalTime)}}</div>
+                                <div>Duration: {{convertDuration(flight.duration)}}</div>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-stroked-button (click)="selectFlight(flight.id, 'Economy')">Select</button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <mat-card appearance="outlined">
+                            <mat-card-header>
+                                <mat-card-title>Business Class</mat-card-title>
+                                <mat-card-subtitle>${{flight.businessPrice}}</mat-card-subtitle>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <div>Depart: {{convertTime(flight.departureTime)}}</div>
+                                <div>Arrive: {{convertTime(flight.arrivalTime)}}</div>
+                                <div>Duration: {{convertDuration(flight.duration)}}</div>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-stroked-button (click)="selectFlight(flight.id, 'Business')">Select</button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <mat-card appearance="outlined">
+                            <mat-card-header>
+                                <mat-card-title>First Class</mat-card-title>
+                                <mat-card-subtitle>${{flight.firstPrice}}</mat-card-subtitle>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <div>Depart: {{convertTime(flight.departureTime)}}</div>
+                                <div>Arrive: {{convertTime(flight.arrivalTime)}}</div>
+                                <div>Duration: {{convertDuration(flight.duration)}}</div>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-stroked-button (click)="selectFlight(flight.id, 'First')">Select</button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </mat-expansion-panel>
+        } @empty {
+            <p>No flights found.</p>
+        }    
     </mat-accordion>
 </div>
-@if (availableFlights.length == 0) {
-    <p>No flights found.</p>
-}

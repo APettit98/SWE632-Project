@@ -1,0 +1,23 @@
+<mat-horizontal-stepper #stepper [(selectedIndex)]="selectedIndex">
+    <mat-step [completed]="!disableSearchButton" [editable]="true">
+        <ng-template matStepLabel>Search for flights</ng-template>
+        <app-flight-search (formIsValid)="searchFormStatusChange($event)"></app-flight-search>
+        <button (click)="searchFlights()" [disabled]="disableSearchButton" mat-flat-button matStepperNext>Search</button>
+    </mat-step>
+    <mat-step [completed]="flightSelected" [editable]="true">
+        <button mat-mini-fab matStepperPrevious><mat-icon>arrow_back</mat-icon></button>
+        <ng-template matStepLabel>Select a flight</ng-template>
+        <app-flight-selector (flightSelected)="flightSelectedEvent($event)"></app-flight-selector>
+    </mat-step>
+    <mat-step [completed]="!disableReservationButton">
+        <button mat-mini-fab matStepperPrevious><mat-icon>arrow_back</mat-icon></button>
+        <ng-template matStepLabel>Provide passenger information</ng-template>
+        <app-flight-reservation (formIsValid)="reservationFormStatusChange($event)"></app-flight-reservation>
+        <button (click)="completeReservation()"mat-flat-button matStepperNext [disabled]="disableReservationButton">Reserve Flight</button>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Confirm reservation</ng-template>
+        <app-booking-confirmation></app-booking-confirmation>
+        <button (click)="returnToStart()" mat-flat-button>Exit</button>
+    </mat-step>
+</mat-horizontal-stepper>

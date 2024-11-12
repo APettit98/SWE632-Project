@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { AppService } from '../app.service';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
@@ -14,6 +14,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { City } from '../city';
+import { ShowOnDirtyOrTouchedErrorStateMatcher } from '../showOnDirtyOrTouchedErrorStateMatcher';
 
 function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
   const toRadians = (degrees: number) => degrees * (Math.PI / 180);
@@ -56,8 +57,10 @@ export class FlightSearchComponent {
   originFormControl = new FormControl(this.emptyCity,[Validators.required, cityValidator()]);
   destinationFormControl = new FormControl(this.emptyCity, [Validators.required, cityValidator()]);
   dateFormControl = new FormControl(null, Validators.required);
+  errorStateMatcher = new ShowOnDirtyOrTouchedErrorStateMatcher();
 
   search: FlightSearch = {origin: this.emptyCity , destination: this.emptyCity , departureDate: new Date()};
+  @Output() formIsValid = new EventEmitter<boolean>();
 
   constructor(private appService:AppService) {
     this.appService.getSearch.subscribe(s => this.search = s);
@@ -65,6 +68,16 @@ export class FlightSearchComponent {
     this.appService.getFilter.subscribe(f => this.filter = f);
     this.appService.getSortOption.subscribe(s => this.sortOption = s);
     this.appService.getMindate.subscribe(d => this.minDate = d);
+    this.originFormControl.statusChanges.subscribe(() => {
+      this.formIsValid.emit(this.originFormControl.valid && this.destinationFormControl.valid && this.dateFormControl.valid);
+    });
+    this.destinationFormControl.statusChanges.subscribe(() => {
+      this.formIsValid.emit(this.originFormControl.valid && this.destinationFormControl.valid && this.dateFormControl.valid);
+    });
+    this.dateFormControl.statusChanges.subscribe(() => {
+      this.formIsValid.emit(this.originFormControl.valid && this.destinationFormControl.valid && this.dateFormControl.valid);
+    });
+
   }
 
   onSelect(): void {
@@ -77,6 +90,11 @@ export class FlightSearchComponent {
 
   ngOnInit(): void {
     this.appService.setSearch({origin: this.emptyCity , destination: this.emptyCity , departureDate: new Date()});
+    this.date = null;
+    this.originFormControl.reset(this.emptyCity);
+    this.destinationFormControl.reset(this.emptyCity);
+    this.dateFormControl.reset(this.date);
+    this.destinationFormControl.setValue(this.emptyCity);
     
     this.getClosestCity(this.flightData.cities).then((closestCity) => {
       if (closestCity) {

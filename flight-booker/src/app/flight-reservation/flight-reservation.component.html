@@ -1,49 +1,71 @@
-<h1>Reserve Your Flight</h1>
 <p>Please enter your personal information</p>
-<mat-form-field>
-    <input 
-        matInput 
-        placeholder="First Name"
-        [formControl]="firstName"
-        required
-    />
-    @if (firstName.hasError('required')) {
-        <mat-error>This field is required</mat-error>
-    }
-    @if (firstName.hasError('pattern')) {
-        <mat-error class="name-error">Name can only have alphabetical characters, spaces, apostrophes, and hyphens</mat-error>
-    }
-</mat-form-field>
-<mat-form-field>
-    <input 
-        matInput 
-        placeholder="Last Name"
-        [formControl]="lastName"
-        required
-    />
-    @if (lastName.hasError('required')) {
-        <mat-error>This field is required</mat-error>
-    }
-    @if (lastName.hasError('pattern')) {
-        <mat-error class="name-error">Name can only have alphabetical characters, spaces, apostrophes, and hyphens</mat-error>
-    }
-</mat-form-field>
-<mat-form-field>
-    <input 
-        matInput 
-        placeholder="Email"
-        [formControl]="email"
-        required
-        email
-    />
-    @if (email.hasError('required')) {
-        <mat-error>This field is required</mat-error>
-    }
-    @if (email.hasError('email')) {
-        <mat-error>Please enter a valid email</mat-error>
-    }
-</mat-form-field>
-<div>
-    <button mat-flat-button [routerLink]="['/select']">Cancel</button>
-    <button mat-stroked-button (click)="createBooking()" [routerLink]="['/confirm']" [disabled]="firstName.hasError('required') || lastName.hasError('required') || email.hasError('required') || email.hasError('email') || firstName.hasError('pattern') || lastName.hasError('pattern')">Reserve Flight</button>
-</div>
+<mat-grid-list cols="4" rowHeight="20rem">
+    <mat-grid-tile colSpan="1">
+        <div class="form-container">
+            <mat-form-field>
+                <input 
+                    matInput 
+                    placeholder="First Name"
+                    [formControl]="firstName"
+                    [errorStateMatcher]="errorStateMatcher"
+                    required
+                />
+                @if (firstName.hasError('required') && (firstName.dirty || firstName.touched)) {
+                    <mat-error>This field is required</mat-error>
+                }
+                @if (firstName.hasError('pattern') && (firstName.dirty || firstName.touched)) {
+                    <mat-error class="name-error">Name can only have alphabetical characters, spaces, apostrophes, and hyphens</mat-error>
+                }
+            </mat-form-field>
+            <mat-form-field>
+                <input 
+                    matInput 
+                    placeholder="Last Name"
+                    [formControl]="lastName"
+                    [errorStateMatcher]="errorStateMatcher"
+                    required
+                />
+                @if (lastName.hasError('required') && (lastName.dirty || lastName.touched)) {
+                    <mat-error>This field is required</mat-error>
+                }
+                @if (lastName.hasError('pattern') && (lastName.dirty || lastName.touched)) {
+                    <mat-error class="name-error">Name can only have alphabetical characters, spaces, apostrophes, and hyphens</mat-error>
+                }
+            </mat-form-field>
+            <mat-form-field>
+                <input 
+                    matInput 
+                    placeholder="Email"
+                    [formControl]="email"
+                    [errorStateMatcher]="errorStateMatcher"
+                    required
+                    email
+                />
+                @if (email.hasError('required') && (email.dirty || email.touched)) {
+                    <mat-error>This field is required</mat-error>
+                }
+                @if (email.hasError('email') && (email.dirty || email.touched)) {
+                    <mat-error>Please enter a valid email</mat-error>
+                }
+            </mat-form-field>   
+       </div>
+    </mat-grid-tile>
+    <mat-grid-tile colSpan="1">
+        <div class="reservation-details">
+            <mat-card appearance="outlined">
+                <mat-card-header>
+                    <mat-card-title>Flight Details</mat-card-title>
+                    <mat-card-subtitle>{{bookedFlight.origin.name}}, {{bookedFlight.origin.stateCode}} to {{bookedFlight.destination.name}}, {{bookedFlight.destination.stateCode}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <div>Date: {{dateString}}</div>
+                    <div>Airline: {{bookedFlight.airline}}</div>
+                    <div>Depart: {{convertTime(bookedFlight.departureTime)}}</div>
+                    <div>Arrive: {{convertTime(bookedFlight.arrivalTime)}}</div>
+                    <div>Class: {{booking.fareClass}}</div>
+                    <div>Price: ${{flightPrice}}</div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
