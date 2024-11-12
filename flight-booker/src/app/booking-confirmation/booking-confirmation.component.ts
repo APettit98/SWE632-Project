@@ -6,11 +6,14 @@ import * as utils from '../utils';
 import { MatCardModule } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { ClipboardModule } from 'ngx-clipboard';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-booking-confirmation',
   standalone: true,
-  imports: [MatCardModule, RouterLink, MatButtonModule],
+  imports: [MatCardModule, RouterLink, MatButtonModule, ClipboardModule, MatIconModule, MatTooltipModule],
   templateUrl: './booking-confirmation.component.html',
   styleUrl: './booking-confirmation.component.css'
 })

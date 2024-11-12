@@ -14,6 +14,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { City } from '../city';
+import { ShowOnDirtyOrTouchedErrorStateMatcher } from '../showOnDirtyOrTouchedErrorStateMatcher';
 
 function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
   const toRadians = (degrees: number) => degrees * (Math.PI / 180);
@@ -56,6 +57,7 @@ export class FlightSearchComponent {
   originFormControl = new FormControl(this.emptyCity,[Validators.required, cityValidator()]);
   destinationFormControl = new FormControl(this.emptyCity, [Validators.required, cityValidator()]);
   dateFormControl = new FormControl(null, Validators.required);
+  errorStateMatcher = new ShowOnDirtyOrTouchedErrorStateMatcher();
 
   search: FlightSearch = {origin: this.emptyCity , destination: this.emptyCity , departureDate: new Date()};
   @Output() formIsValid = new EventEmitter<boolean>();
@@ -88,6 +90,11 @@ export class FlightSearchComponent {
 
   ngOnInit(): void {
     this.appService.setSearch({origin: this.emptyCity , destination: this.emptyCity , departureDate: new Date()});
+    this.date = null;
+    this.originFormControl.reset(this.emptyCity);
+    this.destinationFormControl.reset(this.emptyCity);
+    this.dateFormControl.reset(this.date);
+    this.destinationFormControl.setValue(this.emptyCity);
     
     this.getClosestCity(this.flightData.cities).then((closestCity) => {
       if (closestCity) {

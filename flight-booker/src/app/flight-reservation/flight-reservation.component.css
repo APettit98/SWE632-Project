@@ -1,8 +1,30 @@
-:host {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
 .name-error {
     width: 300%;
+}
+
+.form-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-self: flex-start;
+}
+
+::ng-deep mat-grid-tile .mat-figure {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.reservation-details {
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+}
+
+.mat-mdc-card {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }

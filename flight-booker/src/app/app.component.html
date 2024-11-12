@@ -1,6 +1,6 @@
 <header>
   <div class="header-button">
-    <button mat-flat-button [routerLink]="['/']">Search</button>
+    <button mat-flat-button (click)="resetStepper()" [routerLink]="['/']">Search</button>
     <button mat-flat-button [routerLink]="['/booking']">Manage Reservations</button>
   </div>
 </header>

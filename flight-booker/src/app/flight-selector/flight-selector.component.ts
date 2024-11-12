@@ -49,12 +49,10 @@ export class FlightSelectorComponent {
   @Output() flightSelected = new EventEmitter<boolean>();
 
   constructor(private appService:AppService) {
-    console.log("constructor");
     this.getData();
   }
 
   getData() {
-    console.log("getData");
     this.appService.getSearch.subscribe(s => this.search = s);
     this.appService.getBooking.subscribe(b => this.booking = b);
     this.appService.getFlightData.subscribe(d => this.flightData = d);
@@ -79,7 +77,6 @@ export class FlightSelectorComponent {
   }
 
   initialFilter(): Flight[] {
-    console.log("initialFilter");
     const dayOfWeek = new Date(this.search.departureDate + '/' + (new Date().toLocaleDateString('en-us', {year: "numeric"}))).toLocaleString('en-us', {weekday: 'long'});
     return this.flightData.flights.filter((flight: Flight) => {
       if (flight.origin.name !== this.search.origin.name) {
@@ -113,7 +110,6 @@ export class FlightSelectorComponent {
   }
 
   ngOnInit(): void {
-    console.log("ngOnInit");
     this.getData();
     this.availableFlights = this.initialFilter();
     this.availableAirlines = this.availableFlights.map(flight => flight.airline);
@@ -125,7 +121,6 @@ export class FlightSelectorComponent {
   }
 
   onFareClassFilterChange(): void {
-    console.log("onFareClassFilterChange");
     const priceRange = this.getPriceRange();
     this.maxPrice = priceRange[1];
     if (this.selectedMaxPrice > this.maxPrice || !this.priceSliderChanged) {
@@ -134,7 +129,6 @@ export class FlightSelectorComponent {
   }
 
   filterByAirline() {
-    console.log("filterByAirline");
     const selectedAirlines: string[] = this.filter.selectedAirlines ? this.filter.selectedAirlines : [];
 
     this.availableFlights = this.initialFilter().filter((flight) => {
@@ -154,7 +148,6 @@ export class FlightSelectorComponent {
   }
 
   filterByPrice() {
-    console.log("filterByPrice");
     this.priceSliderChanged = true;
     this.filterByAirline();
     this.availableFlights = this.availableFlights.filter((flight) => {
@@ -183,7 +176,6 @@ export class FlightSelectorComponent {
   }
 
   sortFlights() {
-    console.log("sortFlights");
     this.loading = true;
     setTimeout(() => 
       {
