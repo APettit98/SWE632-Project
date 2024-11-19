@@ -1,0 +1,61 @@
+<mat-accordion multi>
+    <p><b>Your Saved Flights</b></p>
+    <mat-expansion-panel *ngFor="let flight of flightData.savedFlights">
+        <mat-expansion-panel-header class="tab_header">
+            <mat-panel-title class="tab_title">{{flight.flight.origin.name}}, {{flight.flight.origin.stateCode}} - {{flight.flight.destination.name}}, {{flight.flight.destination.stateCode}}</mat-panel-title>
+            <mat-panel-description>{{flight.date | date:'MM/dd/yy'}}</mat-panel-description>
+            <mat-panel-description>{{flight.flight.airline}}</mat-panel-description>
+            <mat-panel-description>${{flight.flight.economyPrice + " (Economy)"}}</mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-grid-list cols="3" rowHeight="15rem">
+            <mat-grid-tile>
+                <mat-card appearance="outlined">
+                    <mat-card-header>
+                        <mat-card-title>Economy Class</mat-card-title>
+                        <mat-card-subtitle>${{flight.flight.economyPrice}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div>Depart: {{convertTime(flight.flight.departureTime)}}</div>
+                        <div>Arrive: {{convertTime(flight.flight.arrivalTime)}}</div>
+                        <div>Duration: {{convertDuration(flight.flight.duration)}}</div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-stroked-button (click)="reserveFlight(flight.flight.id, 'Economy', flight.date)">Reserve</button>
+                    </mat-card-actions>
+                </mat-card>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-card appearance="outlined">
+                    <mat-card-header>
+                        <mat-card-title>Business Class</mat-card-title>
+                        <mat-card-subtitle>${{flight.flight.businessPrice}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div>Depart: {{convertTime(flight.flight.departureTime)}}</div>
+                        <div>Arrive: {{convertTime(flight.flight.arrivalTime)}}</div>
+                        <div>Duration: {{convertDuration(flight.flight.duration)}}</div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-stroked-button (click)="reserveFlight(flight.flight.id, 'Business', flight.date)">Reserve</button>
+                    </mat-card-actions>
+                </mat-card>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-card appearance="outlined">
+                    <mat-card-header>
+                        <mat-card-title>First Class</mat-card-title>
+                        <mat-card-subtitle>${{flight.flight.firstPrice}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div>Depart: {{convertTime(flight.flight.departureTime)}}</div>
+                        <div>Arrive: {{convertTime(flight.flight.arrivalTime)}}</div>
+                        <div>Duration: {{convertDuration(flight.flight.duration)}}</div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-stroked-button (click)="reserveFlight(flight.flight.id, 'First', flight.date)">Reserve</button>
+                    </mat-card-actions>
+                </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </mat-expansion-panel>
+</mat-accordion>

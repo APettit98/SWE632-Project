@@ -8,15 +8,28 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { AppService } from '../app.service';
 import { MatIconModule } from '@angular/material/icon';
+import { FlightSearchHistoryComponent } from "../flight-search-history/flight-search-history.component";
+import { SavedFlightsComponent } from "../saved-flights/saved-flights.component";
+import { MatListModule } from '@angular/material/list';
+import { DatePipe } from '@angular/common';
+import { NgFor } from '@angular/common';
+import { ComponentCanDeactivate } from '../guard.service';
+import { HostListener } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-stepper',
   standalone: true,
-  imports: [MatStepperModule, BookingConfirmationComponent, FlightSearchComponent, FlightSelectorComponent, FlightReservationComponent, MatButtonModule, FormsModule, MatIconModule],
+  imports: [MatStepperModule, BookingConfirmationComponent, FlightSearchComponent, FlightSelectorComponent, FlightReservationComponent, MatButtonModule, FormsModule, MatIconModule, FlightSearchHistoryComponent, SavedFlightsComponent, MatListModule, DatePipe, NgFor],
   templateUrl: './stepper.component.html',
   styleUrl: './stepper.component.css'
 })
-export class StepperComponent {
+export class StepperComponent implements ComponentCanDeactivate {
+  @HostListener('window:beforeunload')
+  canDeactivate(): Observable<boolean> | boolean {
+    return !this.hasUnsavedProgress;
+  }
+
   @ViewChild(FlightSearchComponent) flightSearchComponent: FlightSearchComponent;
   @ViewChild(FlightSelectorComponent) flightSelectorComponent: FlightSelectorComponent;
   @ViewChild(FlightReservationComponent) flightReservationComponent: FlightReservationComponent;
@@ -28,6 +41,7 @@ export class StepperComponent {
   disableSearchButton: boolean = true;
   flightSelected: boolean = false;
   disableReservationButton: boolean = true;
+  hasUnsavedProgress = false;
 
   constructor(private appService: AppService) {
     
@@ -48,6 +62,7 @@ export class StepperComponent {
     this.disableSearchButton = true;
     this.flightSelected = false;
     this.disableReservationButton = true;
+    this.hasUnsavedProgress = false;
 
     this.appService.setBooking({flightId: "", firstName: "", lastName: "", date: new Date(), email: "", bookingCode: "", fareClass: ""});
     this.appService.setSearch({origin: {name: "", state: "", stateCode: "", lat: 0, lon: 0}, destination: {name: "", state: "", stateCode: "", lat: 0, lon: 0}, departureDate: new Date()});
@@ -67,6 +82,7 @@ export class StepperComponent {
     this.maxStepReached = 1;
     this.appService.setBooking({flightId: "", firstName: "", lastName: "", date: new Date(), email: "", bookingCode: "", fareClass: ""});
     this.disableReservationButton = true;
+    this.hasUnsavedProgress = false;
   }
 
   searchFlights() {
@@ -77,10 +93,19 @@ export class StepperComponent {
     }, 500);
   }
 
+  loadSearch(search: any) {
+    this.appService.setSearch(JSON.parse(JSON.stringify(search)));
+    this.completeStep(1);
+    setTimeout(() => {
+      this.flightSelectorComponent.ngOnInit()
+    }, 500);
+  }
+
   completeReservation() {
     this.flightReservationComponent.createBooking();
     this.bookingConfirmationComponent.ngOnInit();
     this.completeStep(3);
+    this.hasUnsavedProgress = false;
   }
 
 
@@ -92,6 +117,7 @@ export class StepperComponent {
     this.flightSelected = flightSelected;
     this.completeStep(2);
     this.flightReservationComponent.ngOnInit();
+    this.hasUnsavedProgress = true;
   }
 
   reservationFormStatusChange(isValid: any) {

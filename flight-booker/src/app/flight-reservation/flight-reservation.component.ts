@@ -20,7 +20,6 @@ import { ShowOnDirtyOrTouchedErrorStateMatcher } from '../showOnDirtyOrTouchedEr
   styleUrl: './flight-reservation.component.css'
 })
 export class FlightReservationComponent {
-
   booking: Booking = {flightId: "", firstName: "", lastName: "", date: new Date(), email: "", bookingCode: "", fareClass: ""};
   flightData: any = {};
   flightPrice: number = 0;

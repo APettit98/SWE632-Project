@@ -3,6 +3,10 @@
         <ng-template matStepLabel>Search for flights</ng-template>
         <app-flight-search (formIsValid)="searchFormStatusChange($event)"></app-flight-search>
         <button (click)="searchFlights()" [disabled]="disableSearchButton" mat-flat-button matStepperNext>Search</button>
+        <div class="savers">
+            <app-flight-search-history (loadEvent)="loadSearch($event)" class="search-history"></app-flight-search-history>
+            <app-saved-flights (reserveEvent)="flightSelectedEvent($event)" class="saved-flights"></app-saved-flights>
+        </div>
     </mat-step>
     <mat-step [completed]="flightSelected" [editable]="true">
         <button mat-mini-fab matStepperPrevious><mat-icon>arrow_back</mat-icon></button>
