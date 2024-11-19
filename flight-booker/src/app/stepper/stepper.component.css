@@ -1,0 +1,11 @@
+.savers {
+    display: flex
+}
+
+.search-history {
+    flex: 1
+}
+
+.saved-flights {
+    flex: 2
+}

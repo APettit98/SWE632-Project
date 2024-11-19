@@ -1,4 +1,4 @@
-<p>Viewing flights from {{this.search.origin.name}}, {{this.search.origin.stateCode}} to {{this.search.destination.name}}, {{this.search.destination.stateCode}} on {{this.searchDateString}}</p>
+<p>Viewing flights from {{this.search.origin.name}}, {{this.search.origin.stateCode}} to {{this.search.destination.name}}, {{this.search.destination.stateCode}} on {{this.search.departureDate | date:'MM/dd/yy'}}</p>
 <div class="filter-and-sort">
     <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
@@ -59,7 +59,7 @@
 <div class="flight-selection">
     <mat-accordion multi>
         @for (flight of availableFlights; track flight.id) {
-            <mat-expansion-panel>
+            <div class="expander-tab"><mat-expansion-panel class="expansion-panel">
                 <mat-expansion-panel-header>
                     <mat-panel-title>{{convertTime(flight.departureTime)}} - {{convertTime(flight.arrivalTime)}}</mat-panel-title>
                     <mat-panel-description>{{convertDuration(flight.duration)}}</mat-panel-description>
@@ -122,6 +122,7 @@
                     </mat-grid-tile>
                 </mat-grid-list>
             </mat-expansion-panel>
+            <button mat-stroked-button (click)="saveFlight(flight)" class="save-button">Save Flight</button></div>
         } @empty {
             <p>No flights found.</p>
         }    

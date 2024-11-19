@@ -8,6 +8,6 @@
     </p>
     <p>{{ dates[bookedFlight.date] }} {{ convertTime(bookedFlight.departureTime) }} - {{ convertTime(bookedFlight.arrivalTime) }}</p>
     <p>Refund: ${{ farePaid }}</p>
-    <button mat-stroked-button (click)="cancelBooking()" [routerLink]="['/cancelConfirm']">Cancel Flight</button>
-    <button mat-flat-button [routerLink]="['/booking']">Do Not Cancel</button>
+    <button mat-stroked-button [routerLink]="['/booking']">Do Not Cancel</button>
+    <button mat-flat-button (click)="cancelBooking()" [routerLink]="['/cancelConfirm']">Cancel Reservation</button>
 </div>

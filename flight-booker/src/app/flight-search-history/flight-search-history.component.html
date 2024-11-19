@@ -1,0 +1,7 @@
+<mat-action-list>
+    <p class="header_title"><b>Your Recent Searches</b></p>
+    <button mat-list-item *ngFor="let save of flightData.savedSearches" (click)="loadSearch(save)" matStepperNext>
+        {{save.origin.name}}, {{save.origin.stateCode}} to {{save.destination.name}}, {{save.destination.stateCode}} - {{save.departureDate | date:'MM/dd/yy'}}
+        <mat-icon class="chevron_icon" aria-hidden="false" fontIcon="chevron_right"></mat-icon>
+    </button>
+</mat-action-list>

@@ -17,12 +17,13 @@ import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
 import * as utils from '../utils';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-flight-selector',
   standalone: true,
-  imports: [MatExpansionModule, MatCardModule, MatGridListModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatSelectModule, MatSliderModule, FormsModule, ReactiveFormsModule, MatExpansionModule, MatCheckboxModule, NgFor, NgIf, RouterLink, MatProgressSpinnerModule],
+  imports: [MatExpansionModule, MatCardModule, MatGridListModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatSelectModule, MatSliderModule, FormsModule, ReactiveFormsModule, MatExpansionModule, MatCheckboxModule, NgFor, NgIf, RouterLink, MatProgressSpinnerModule, DatePipe],
   templateUrl: './flight-selector.component.html',
   styleUrl: './flight-selector.component.css',
 })
@@ -58,10 +59,15 @@ export class FlightSelectorComponent {
     this.appService.getFlightData.subscribe(d => this.flightData = d);
     this.appService.getFilter.subscribe(f => this.filter = f);
     this.appService.getSortOption.subscribe(s => this.sortOption = s);
-    this.searchDateString = this.search.departureDate.toLocaleDateString('en-us', {month: 'short', day: 'numeric', year: 'numeric'});
+    this.searchDateString = new Date(this.search.departureDate).toLocaleDateString('en-us', {month: 'short', day: 'numeric', year: 'numeric'});
   }
 
-
+  saveFlight(flight: Flight) {
+    let date = this.search.departureDate
+    if (!this.flightData.savedFlights.includes({flight, date})) {
+      this.flightData.savedFlights.unshift({flight: flight, date: date});
+    }
+  }
 
  selectFlight(id: string, fareClass: string){
     this.appService.setBooking({
@@ -77,7 +83,8 @@ export class FlightSelectorComponent {
   }
 
   initialFilter(): Flight[] {
-    const dayOfWeek = new Date(this.search.departureDate + '/' + (new Date().toLocaleDateString('en-us', {year: "numeric"}))).toLocaleString('en-us', {weekday: 'long'});
+    const dayOfWeek = new Date(new Date(this.search.departureDate) + '/' + (new Date().toLocaleDateString('en-us', {year: "numeric"}))).toLocaleString('en-us', {weekday: 'long'});
+    console.log(dayOfWeek);
     return this.flightData.flights.filter((flight: Flight) => {
       if (flight.origin.name !== this.search.origin.name) {
         return false;

@@ -15,6 +15,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { City } from '../city';
 import { ShowOnDirtyOrTouchedErrorStateMatcher } from '../showOnDirtyOrTouchedErrorStateMatcher';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
 
 function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
   const toRadians = (degrees: number) => degrees * (Math.PI / 180);
@@ -41,7 +43,7 @@ function cityValidator(): ValidatorFn {
   selector: 'app-flight-search',
   standalone: true,
   providers: [provideNativeDateAdapter()],
-  imports: [MatButtonModule, RouterLink, NgFor, CommonModule, MatFormFieldModule, MatSelectModule, FormsModule, ReactiveFormsModule, MatInputModule, MatSliderModule, MatCheckboxModule, MatGridListModule, MatDatepickerModule, MatInputModule],
+  imports: [MatButtonModule, RouterLink, NgFor, CommonModule, MatFormFieldModule, MatSelectModule, FormsModule, ReactiveFormsModule, MatInputModule, MatSliderModule, MatCheckboxModule, MatGridListModule, MatDatepickerModule, MatInputModule, MatListModule, MatIconModule],
   templateUrl: './flight-search.component.html',
   styleUrl: './flight-search.component.css',
   changeDetection: ChangeDetectionStrategy.Default
@@ -110,6 +112,9 @@ export class FlightSearchComponent {
     this.appService.setSearch(this.search);
     this.appService.setFilter(this.filter);
     this.appService.setSortOption(this.sortOption);
+    if (!this.flightData.savedSearches.includes(this.search)) {
+      this.flightData.savedSearches.unshift(JSON.parse(JSON.stringify(this.search)));
+    }
   }
 
   getClosestCity(cities: { name: string, state: string, stateCode: string, code: string, lat: number, lon: number }[]) {

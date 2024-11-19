@@ -5,11 +5,13 @@ import { BookingCancelComponent } from './booking-cancel/booking-cancel.componen
 import { CancelConfirmationComponent } from './cancel-confirmation/cancel-confirmation.component';
 import { ForgotBookingComponent } from './forgot-booking/forgot-booking.component';
 import { StepperComponent } from './stepper/stepper.component';
+import { GuardService } from './guard.service';
 
 export const routes: Routes = [
     {
         path: '',
-        component: StepperComponent
+        component: StepperComponent,
+        canDeactivate: [GuardService]
     },
     {
         path: 'booking',
