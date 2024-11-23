@@ -110,7 +110,6 @@ export class StepperComponent implements ComponentCanDeactivate {
 
 
   completeSearchStep(complete: any) {
-    console.log("Completed search step: ", complete);
     if (complete) {
       this.searchFlights();
     }
