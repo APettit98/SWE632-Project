@@ -109,8 +109,11 @@ export class StepperComponent implements ComponentCanDeactivate {
   }
 
 
-  searchFormStatusChange(isValid: any) {
-    this.disableSearchButton = !isValid;
+  completeSearchStep(complete: any) {
+    console.log("Completed search step: ", complete);
+    if (complete) {
+      this.searchFlights();
+    }
   }
 
   flightSelectedEvent(flightSelected: any) {

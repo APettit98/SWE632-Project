@@ -62,7 +62,7 @@ export class FlightSearchComponent {
   errorStateMatcher = new ShowOnDirtyOrTouchedErrorStateMatcher();
 
   search: FlightSearch = {origin: this.emptyCity , destination: this.emptyCity , departureDate: new Date()};
-  @Output() formIsValid = new EventEmitter<boolean>();
+  @Output() completedSearchStep = new EventEmitter<boolean>();
 
   constructor(private appService:AppService) {
     this.appService.getSearch.subscribe(s => this.search = s);
@@ -70,16 +70,6 @@ export class FlightSearchComponent {
     this.appService.getFilter.subscribe(f => this.filter = f);
     this.appService.getSortOption.subscribe(s => this.sortOption = s);
     this.appService.getMindate.subscribe(d => this.minDate = d);
-    this.originFormControl.statusChanges.subscribe(() => {
-      this.formIsValid.emit(this.originFormControl.valid && this.destinationFormControl.valid && this.dateFormControl.valid);
-    });
-    this.destinationFormControl.statusChanges.subscribe(() => {
-      this.formIsValid.emit(this.originFormControl.valid && this.destinationFormControl.valid && this.dateFormControl.valid);
-    });
-    this.dateFormControl.statusChanges.subscribe(() => {
-      this.formIsValid.emit(this.originFormControl.valid && this.destinationFormControl.valid && this.dateFormControl.valid);
-    });
-
   }
 
   onSelect(): void {
@@ -105,6 +95,11 @@ export class FlightSearchComponent {
         }
       }
     });
+  }
+
+  emitCompleted(): void {
+    console.log("Emit completed");
+    this.completedSearchStep.emit(true);
   }
 
   updateSearch() {

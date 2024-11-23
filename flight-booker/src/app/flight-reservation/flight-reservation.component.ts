@@ -65,7 +65,7 @@ export class FlightReservationComponent {
       default:
         this.flightPrice = 0;
     }
-    this.dateString = this.booking.date.toLocaleDateString('en-us', {month: 'short', day: 'numeric', year: 'numeric'});
+    this.dateString = this.booking.date.toLocaleDateString('en-us', {month: 'long', day: 'numeric', year: 'numeric'});
 
   }
 

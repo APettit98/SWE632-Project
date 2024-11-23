@@ -1,4 +1,4 @@
-<mat-grid-list cols="5" rowHeight="5rem" class="searchForm">
+<mat-grid-list cols="6" rowHeight="5rem" class="searchForm">
     <mat-grid-tile>
         <mat-form-field>
             <mat-label>Origin</mat-label>
@@ -64,5 +64,9 @@
             </mat-select>
         </mat-form-field>
     </mat-grid-tile>
-    
+    <mat-grid-tile>
+        <div class="searchButtonTile">
+            <button class="searchButton" (click)="emitCompleted()" [disabled]="!this.originFormControl.valid || !this.destinationFormControl.valid || !this.dateFormControl.valid" mat-flat-button>Search</button>
+        </div>
+    </mat-grid-tile>
 </mat-grid-list>
