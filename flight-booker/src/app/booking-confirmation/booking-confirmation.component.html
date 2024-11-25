@@ -1,14 +1,15 @@
 <div class="reservation-details">
     <mat-card appearance="outlined">
-        <mat-card-header>
-            <mat-card-title>Reservation Details</mat-card-title>
-            <mat-card-title>Reservation Code: {{booking.bookingCode}}
+        <mat-card-content>
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <b>Your Reservation Details</b>
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <b>Reservation Code: {{booking.bookingCode}}</b>
                 <button ngxClipboard [cbContent]="booking.bookingCode" mat-icon-button matTooltip="Copy booking code to clipboard">
                     <mat-icon>content_copy</mat-icon>   
                 </button>
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+            </div>
             <div>Date: {{dateString}}</div>
             <div>Flight: {{bookedFlight.airline}} {{bookedFlight.originCode}} to {{bookedFlight.destinationCode}}</div>
             <div>Depart: {{convertTime(bookedFlight.departureTime)}}</div>
@@ -18,7 +19,7 @@
             <div>Passenger: {{booking.firstName}} {{booking.lastName}}</div>
             <div>Email: {{booking.email}}</div>
         </mat-card-content>
-        <mat-card-content style="font-size: 10px; line-height: 1.25;">
+        <mat-card-content style="font-weight: lighter; line-height: 1.25; margin-top: 2rem;">
             <div>Important: Please be sure you have copied your reservation code before exiting the page. You will need it later to change details of your flight.</div>
         </mat-card-content>
     </mat-card>

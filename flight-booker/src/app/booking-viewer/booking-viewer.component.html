@@ -1,14 +1,24 @@
 <h3>View Reservation</h3>
 <p>Enter your last name and code for the reservation:</p>
 <div class="bookingRequest">
-    <mat-form-field >
-        <mat-label>Last Name</mat-label>
-        <input [(ngModel)]="name" matInput>
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Reservation Code</mat-label>
-        <input [(ngModel)]="code" matInput>
-    </mat-form-field>
+    <mat-grid-list cols="6" rowHeight="5rem">
+        <mat-grid-tile class="reservationForm">
+            <mat-form-field >
+                <mat-label>Last Name</mat-label>
+                <input [(ngModel)]="name" matInput>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field>
+                <mat-label>Reservation Code</mat-label>
+                <input [(ngModel)]="code" matInput>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <div class="viewButtonTile">
+                <button class="viewButton" mat-flat-button [disabled]="isValid()" (click)="selectBooking()" [routerLink]="['/details']">View Reservation Details</button>
+            </div>
+            </mat-grid-tile>
+    </mat-grid-list>
+    <a [routerLink]="['/forgot']" class="forgotLink">Forgot reservation code?</a>    
 </div>
-<div><button mat-flat-button [disabled]="isValid()" (click)="selectBooking()" [routerLink]="['/details']">View Reservation Details</button></div>
-<a [routerLink]="['/forgot']" class="forgotLink">Forgot reservation code?</a>
