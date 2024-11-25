@@ -17,8 +17,13 @@
 }
 
 .reservation-details {
-    width: 90%;
-    align-items: center;
-    justify-content: center;
+    width: 25%;
+    justify-content: flex-start;
+    align-items: flex-start;
     align-self: flex-start;
+    margin-bottom: 2rem;
+}
+
+.form-list {
+    margin-bottom: 1rem;
 }

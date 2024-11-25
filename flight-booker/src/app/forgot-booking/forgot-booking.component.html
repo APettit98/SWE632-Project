@@ -1,4 +1,4 @@
-<h3>Recover Resrvation Code</h3>
+<h3>Recover Reservation Code</h3>
 <p>Enter your email:</p>
 <div class="EmailForm">
     <mat-form-field>
@@ -17,14 +17,16 @@
 </div>
 <button mat-stroked-button (click)="searchBookings()">Search</button>
 
-<div *ngIf="codesVisible">
-    <p><b>Matching flights</b></p>
-    <p *ngFor="let data of codesData">
-        {{data.flight.originCode}}
-        <mat-icon aria-hidden="false" fontIcon="trending_flat"></mat-icon>
-        {{data.flight.destinationCode}}, {{dateToString(date)}} {{convertTime(data.flight.departureTime)}}     <b>{{data.booking.bookingCode}}</b>
-    </p>
-    @if (codesData.length == 0) {
-        <p>No reservations found.</p>
-    }
+<div class="matches" *ngIf="codesVisible">
+    <mat-list>
+        <b>Matching flights</b>
+        <div mat-list-item *ngFor="let data of codesData">
+            {{data.flight.originCode}}
+            <mat-icon aria-hidden="false" fontIcon="trending_flat"></mat-icon>
+            {{data.flight.destinationCode}}, {{dateToString(date)}} {{convertTime(data.flight.departureTime)}}     <b>{{data.booking.bookingCode}}</b>
+        </div>
+        @if (codesData.length == 0) {
+            <div>No reservations found.</div>
+        }
+    </mat-list>
 </div>
