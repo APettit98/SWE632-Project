@@ -60,8 +60,8 @@
     <mat-accordion multi>
         @for (flight of availableFlights; track flight.id) {
             <div class="expander-tab"><mat-expansion-panel class="expansion-panel">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>{{convertTime(flight.departureTime)}} - {{convertTime(flight.arrivalTime)}}</mat-panel-title>
+                <mat-expansion-panel-header class="expansion-header">
+                    <mat-panel-title class="time-info">{{convertTime(flight.departureTime)}} - {{convertTime(flight.arrivalTime)}}</mat-panel-title>
                     <mat-panel-description>{{convertDuration(flight.duration)}}</mat-panel-description>
                     <mat-panel-description>
                         {{flight.originCode}} 
@@ -73,7 +73,7 @@
                 </mat-expansion-panel-header>
                 <mat-grid-list cols="3" rowHeight="15rem">
                     <mat-grid-tile>
-                        <mat-card appearance="outlined">
+                        <mat-card style="border: 0; box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);">
                             <mat-card-header>
                                 <mat-card-title>Economy Class</mat-card-title>
                                 <mat-card-subtitle>${{flight.economyPrice}}</mat-card-subtitle>
@@ -89,7 +89,7 @@
                         </mat-card>
                     </mat-grid-tile>
                     <mat-grid-tile>
-                        <mat-card appearance="outlined">
+                        <mat-card style="border: 0; box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);">
                             <mat-card-header>
                                 <mat-card-title>Business Class</mat-card-title>
                                 <mat-card-subtitle>${{flight.businessPrice}}</mat-card-subtitle>
@@ -105,7 +105,7 @@
                         </mat-card>
                     </mat-grid-tile>
                     <mat-grid-tile>
-                        <mat-card appearance="outlined">
+                        <mat-card style="border: 0; box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);">
                             <mat-card-header>
                                 <mat-card-title>First Class</mat-card-title>
                                 <mat-card-subtitle>${{flight.firstPrice}}</mat-card-subtitle>

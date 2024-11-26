@@ -44,3 +44,11 @@
 .save-button {
     flex: 1
 }
+
+.expansion-header{
+    display: flex
+}
+
+.time-info {
+    flex: 2
+}

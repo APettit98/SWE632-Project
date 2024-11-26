@@ -14,12 +14,13 @@ import { FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angu
 import * as utils from '../utils'
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-forgot-booking',
   standalone: true,
   providers: [provideNativeDateAdapter()],
-  imports: [CommonModule, MatButtonModule, RouterLink, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatIcon, MatSelect, MatOption, MatInputModule, MatDatepickerModule],
+  imports: [CommonModule, MatButtonModule, RouterLink, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatIcon, MatSelect, MatOption, MatInputModule, MatDatepickerModule, MatListModule],
   templateUrl: './forgot-booking.component.html',
   styleUrl: './forgot-booking.component.css'
 })

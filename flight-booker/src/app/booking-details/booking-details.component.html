@@ -1,8 +1,10 @@
 <h3>Reservation Details</h3>
 <div class="bookingDetails">
-    <mat-card appearance="outlined">
-        <mat-card-header><b>Reservation {{ booking.bookingCode }}</b></mat-card-header>
+    <mat-card style="border: 0; box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);">
         <mat-card-content> 
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <b>Reservation {{ booking.bookingCode }}</b>
+            </div>
             <div>Date: {{dateString}}</div>
             <div>Flight: {{bookedFlight.airline}} {{bookedFlight.originCode}} to {{bookedFlight.destinationCode}}</div>
             <div>Depart: {{convertTime(bookedFlight.departureTime)}}</div>
@@ -12,7 +14,7 @@
             <div>Passenger: {{booking.firstName}} {{booking.lastName}}</div>
             <div>Email: {{booking.email}}</div>
         </mat-card-content>
-        <mat-card-actions>
+        <mat-card-actions style="align-items: center; align-self: center; margin-bottom: 1rem;">
             <button mat-stroked-button [routerLink]="['/booking']">Close</button>
             <button mat-flat-button [routerLink]="['/cancel']">Cancel Booking</button>
         </mat-card-actions>

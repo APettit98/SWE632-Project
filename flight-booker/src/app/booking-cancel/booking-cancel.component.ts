@@ -6,11 +6,12 @@ import { MatButtonModule } from '@angular/material/button';
 import * as utils from '../utils';
 import { RouterLink } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-booking-cancel',
   standalone: true,
-  imports: [MatButtonModule, RouterLink, MatIcon],
+  imports: [MatButtonModule, RouterLink, MatIcon, MatCardModule],
   templateUrl: './booking-cancel.component.html',
   styleUrl: './booking-cancel.component.css'
 })

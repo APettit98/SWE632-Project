@@ -1,0 +1,7 @@
+.cancelMenu {
+    width: 25%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-self: flex-start;
+    padding-bottom: 1rem;
+}
